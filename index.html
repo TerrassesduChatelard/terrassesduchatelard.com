@@ -282,6 +282,7 @@ tr.total td{background:var(--pine);color:var(--paper);font-family:var(--f-displa
 .coord span{font-family:var(--f-mono);font-weight:600;font-size:0.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-top:12px}
 form{background:var(--stone);border-radius:20px;padding:clamp(22px,3vw,36px);display:grid;grid-template-columns:1fr 1fr;gap:16px;min-width:0}
 .field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.duree{grid-column:1/-1;margin:-4px 0 0;font-size:.92rem;color:var(--pine);font-weight:600}
 .field.full{grid-column:1/-1}
 label,.lbl{font-size:.85rem;font-weight:500;color:var(--ink-soft)}
 input,select,textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;width:100%;min-width:0}
@@ -914,7 +915,10 @@ footer p{font-size:.9rem;color:var(--band-soft)}
       <div class="field"><label for="nom">Nom et prénom</label><input id="nom" name="nom" required autocomplete="name"></div>
       <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" required autocomplete="email"></div>
       <div class="field"><label for="tel">Téléphone</label><input id="tel" name="telephone" type="tel" required autocomplete="tel"></div>
-      <div class="field"><label for="date">Date souhaitée</label><input id="date" name="date" type="date"></div>
+      <div class="field"><label for="nb">Nombre d'invités</label><input id="nb" name="invites" type="number" min="1" max="100" inputmode="numeric"></div>
+      <div class="field"><label for="arr">Date d'arrivée</label><input id="arr" name="arrivee" type="date"></div>
+      <div class="field"><label for="dep">Date de départ</label><input id="dep" name="depart" type="date"></div>
+      <p class="duree full" id="duree" hidden></p>
       <div class="field full"><span class="lbl">Type d'événement</span>
         <div class="chips">
           <input type="radio" name="type" id="t1" value="Mariage" checked><label for="t1">Mariage</label>
@@ -924,9 +928,6 @@ footer p{font-size:.9rem;color:var(--band-soft)}
           <input type="radio" name="type" id="t5" value="Stage ou séminaire"><label for="t5">Stage ou séminaire</label>
         </div>
       </div>
-      <div class="field"><label for="nb">Nombre d'invités</label><input id="nb" name="invites" type="number" min="1" max="100" inputmode="numeric"></div>
-      <div class="field"><label for="nuits">Nuits sur place</label>
-        <select id="nuits" name="nuits"><option>Pas de nuitée</option><option>1 nuit</option><option selected>2 nuits</option><option>3 nuits ou plus</option></select></div>
       <div class="field full"><label for="meca">Méchoui ou grillades</label>
         <select id="meca" name="mechoui"><option>Pas encore décidé</option><option>Méchoui d'agneau</option><option>Cochon à la broche</option><option>Nous nous occupons de la cuisine</option></select></div>
       <div class="field full"><label for="msg">Votre projet</label><textarea id="msg" name="message" placeholder="Le programme, vos questions, vos envies…"></textarea></div>
@@ -952,14 +953,24 @@ footer p{font-size:.9rem;color:var(--band-soft)}
   n.addEventListener('click',function(e){if(e.target.tagName==='A'){n.classList.remove('open');b.setAttribute('aria-expanded','false')}});
   // WhatsApp en priorité : le message est prérempli avec les réponses du formulaire.
   var f=document.getElementById('devis'), sent=document.getElementById('sent');
+  var arr=document.getElementById('arr'), dep=document.getElementById('dep'), du=document.getElementById('duree');
+  function fr(x){if(!x)return '';var p=x.split('-');return p[2]+'/'+p[1]+'/'+p[0]}
+  function nuits(){if(!arr.value||!dep.value)return null;return Math.round((new Date(dep.value)-new Date(arr.value))/864e5)}
+  function txtN(n){return n===0?'sans nuitée':n+(n>1?' nuits':' nuit')}
+  try{var td=new Date();arr.min=new Date(td-td.getTimezoneOffset()*6e4).toISOString().slice(0,10)}catch(e){}
+  function upd(){
+    if(arr.value){dep.min=arr.value; if(!dep.value||dep.value<arr.value){var x=new Date(arr.value);x.setDate(x.getDate()+2);dep.value=x.toISOString().slice(0,10)}}
+    var n=nuits(); if(n!==null&&n>=0){du.textContent='Durée du séjour : '+txtN(n);du.hidden=false}else du.hidden=true;
+  }
+  arr.addEventListener('change',upd); dep.addEventListener('change',upd);
   function msg(){
     var v=function(id){var el=document.getElementById(id);return el&&el.value?el.value.trim():''};
     var t=f.querySelector('input[name="type"]:checked');
-    var d=v('date'); if(d){var p=d.split('-'); d=p[2]+'/'+p[1]+'/'+p[0]}
+    var a=fr(v('arr')), d=fr(v('dep')), n=nuits();
     var l=['Bonjour, je souhaite un devis pour Les Terrasses du Châtelard.','',
       'Nom : '+v('nom'),'E-mail : '+v('email'),'Téléphone : '+v('tel'),
-      'Date souhaitée : '+(d||'à définir'),'Événement : '+(t?t.value:''),
-      "Nombre d'invités : "+(v('nb')||'à définir'),'Nuits sur place : '+v('nuits'),
+      'Arrivée : '+(a||'à définir'),'Départ : '+(d||'à définir')+(n!==null?' ('+txtN(n)+')':''),
+      'Événement : '+(t?t.value:''),"Nombre d'invités : "+(v('nb')||'à définir'),
       'Méchoui : '+v('meca')];
     if(v('msg')) l.push('','Projet : '+v('msg'));
     return l.join('\n');
