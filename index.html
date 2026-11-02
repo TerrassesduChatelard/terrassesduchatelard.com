@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Les Terrasses du Châtelard</title>
+<meta name="description" content="Gîte de groupe en gestion libre entre Alpes et Provence : corps de ferme rénové pour vos événements festifs, 60 couchages, 100 convives, méchoui à l'agneau de Sisteron. Thèze, Alpes-de-Haute-Provence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Work+Sans:wght@400;500;600&family=EB+Garamond:wght@500;600;700&display=swap">
+<style>
+/* Layout : site d'une page guidé par les photos — la ferme et ses montagnes en ouverture, l'esprit, le méchoui en vedette, puis espaces, couchages, extérieurs, réservation et contact. */
+:root{
+  --stone:#F2EFE8; --paper:#FBFAF6; --card:#FFFFFF;
+  --ink:#1F2A24; --ink-soft:#4C5A52;
+  --pine:#2F4A3C; --sun:#D99A2B; --sun-ink:#8A5B0C;
+  --band:#2A2620; --band-fg:#F4EEE2; --band-soft:#C9BFAE;   /* bande du feu : brun braise */
+  --line:rgba(31,42,36,.14);
+  --f-display:"Young Serif", Georgia, "Times New Roman", serif;
+  --f-body:"Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"EB Garamond", Garamond, Georgia, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --stone:#151C18; --paper:#1B231F; --card:#202A25; --ink:#ECE8DE; --ink-soft:#B4BDB6;
+  --pine:#9CC2AB; --sun:#E7B04F; --sun-ink:#F0C46F;
+  --band:#0F0D0B; --band-fg:#F4EEE2; --band-soft:#B8AE9D;
+  --line:rgba(236,232,222,.14); color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --stone:#151C18; --paper:#1B231F; --card:#202A25; --ink:#ECE8DE; --ink-soft:#B4BDB6;
+  --pine:#9CC2AB; --sun:#E7B04F; --sun-ink:#F0C46F;
+  --band:#0F0D0B; --band-fg:#F4EEE2; --band-soft:#B8AE9D;
+  --line:rgba(236,232,222,.14); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--stone);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px, env(safe-area-inset-left,0px));padding-right:max(20px, env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.1;text-wrap:balance;margin:0}
+h2{font-size:clamp(2rem,4.4vw,3.3rem)}
+p{margin:0}
+a{color:inherit}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--sun);outline-offset:3px;border-radius:4px}
+.eyebrow{font-family:var(--f-mono);font-weight:600;font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sun-ink)}
+.muted{color:var(--ink-soft)}
+
+/* Header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{flex:none}
+.brand b{font-family:var(--f-display);font-weight:400;font-size:1.08rem;line-height:1.05}
+nav.links{display:flex;gap:18px;align-items:center}
+nav.links a.nav-must{color:var(--sun-ink);font-weight:600}
+.nav-tag{display:inline-block;margin-left:4px;padding:2px 8px;border-radius:999px;background:var(--sun);color:#1F2A24;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;vertical-align:1px}
+nav.links a{text-decoration:none;font-size:.93rem;color:var(--ink-soft)}
+nav.links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;background:var(--pine);color:var(--paper);text-decoration:none;font-weight:600;font-size:.95rem;border:0;cursor:pointer;font-family:var(--f-body);transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+nav.links .btn{color:var(--paper)}
+.menu-btn{display:none;background:none;border:0;padding:8px;color:var(--ink);cursor:pointer}
+@media (max-width:1180px){
+  nav.links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px max(20px, env(safe-area-inset-right,0px)) 20px max(20px, env(safe-area-inset-left,0px))}
+  nav.links.open{display:flex}
+  nav.links a{padding:14px 0;border-bottom:1px solid var(--line);font-size:1.05rem}
+  nav.links .btn{margin-top:16px;justify-content:center;border:0}
+  .menu-btn{display:block}
+}
+
+/* Hero photo */
+.hero{background:var(--stone)}
+.hero-top{padding-block:clamp(36px,6vw,72px) clamp(24px,3.5vw,40px);display:grid;grid-template-columns:1fr auto;gap:12px 40px;align-items:end}
+.hero-top .eyebrow{grid-column:1/-1}
+.hero h1{font-size:clamp(2.5rem,7vw,5.6rem);color:var(--ink);max-width:14ch}
+.hero .slogan{font-family:var(--f-display);font-size:clamp(1.4rem,2.8vw,2.2rem);line-height:1.15;color:var(--sun-ink);text-align:right;padding-bottom:.4em}
+@media (max-width:760px){.hero-top{grid-template-columns:1fr}.hero .slogan{text-align:left;padding-bottom:0}}
+.hero-photo{margin:0;position:relative;height:clamp(260px,50vw,620px);background:#2b3a33;overflow:hidden}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.hero-intro{padding-block:clamp(32px,4vw,48px) 0;display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(20px,4vw,56px);align-items:center}
+.hero-intro .txt{display:flex;flex-direction:column;gap:12px;min-width:0}
+.hero .sub{font-family:var(--f-mono);font-weight:600;font-size:clamp(1rem,1.5vw,1.15rem);letter-spacing:.08em;text-transform:uppercase;color:var(--pine)}
+.hero-intro p{font-size:clamp(1.05rem,1.5vw,1.2rem);color:var(--ink-soft);max-width:40rem}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end}
+.hero .btn{background:var(--sun);color:#1F2A24}
+.hero .btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+@media (max-width:860px){.hero-intro{grid-template-columns:1fr}.hero .cta{justify-content:flex-start}}
+
+.facts{position:relative;z-index:2;margin-top:-56px;background:linear-gradient(var(--stone),var(--stone)) bottom/100% 56px no-repeat}
+.facts .row{display:grid;grid-template-columns:repeat(4,1fr);background:var(--paper);border-radius:18px;box-shadow:0 20px 50px -24px rgba(20,30,25,.4);overflow:hidden}
+.fact{padding:22px 24px;border-left:1px solid var(--line)}
+.fact:first-child{border-left:0}
+.fact .n{font-family:var(--f-display);font-size:2.3rem;line-height:1;color:var(--pine);font-variant-numeric:tabular-nums}
+.fact .l{margin-top:6px;font-size:.88rem;color:var(--ink-soft);line-height:1.35}
+@media (max-width:760px){.facts .row{grid-template-columns:1fr 1fr}.fact:nth-child(3){border-left:0}.fact:nth-child(n+3){border-top:1px solid var(--line)}}
+
+section{padding-block:clamp(72px,10vw,120px)}
+.head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,5vw,72px);align-items:end;margin-bottom:clamp(32px,5vw,52px)}
+.head h2{margin-top:12px}
+.head p{color:var(--ink-soft);max-width:36rem}
+@media (max-width:760px){.head{grid-template-columns:1fr}}
+
+/* Photos */
+.pic{border-radius:14px;overflow:hidden;background:color-mix(in srgb,var(--pine) 14%,var(--paper));position:relative;max-width:100%}
+.pic img{width:100%;height:100%;object-fit:cover}
+.pic figcaption{position:absolute;left:12px;bottom:12px;padding:5px 12px;border-radius:999px;background:color-mix(in srgb,var(--paper) 92%,transparent);font-family:var(--f-mono);font-weight:600;font-size:0.85rem;color:var(--ink)}
+figure{margin:0}
+
+/* Esprit */
+.story{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(28px,5vw,80px);align-items:center}
+.story .txt{display:flex;flex-direction:column;gap:18px;min-width:0}
+.story p{color:var(--ink-soft);max-width:34rem}
+.story blockquote{margin:6px 0 0;padding-left:20px;border-left:3px solid var(--sun);font-family:var(--f-display);font-size:1.32rem;line-height:1.38;color:var(--ink)}
+.mosaic{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:230px 230px;gap:12px}
+.mosaic .pic:first-child{grid-row:span 2}
+@media (max-width:860px){.story{grid-template-columns:1fr}}
+@media (max-width:520px){.mosaic{grid-template-rows:170px 170px}}
+
+/* L'essentiel */
+.keys{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0 28px;border-top:1px solid var(--line)}
+.keys li{position:relative;padding:14px 0 14px 22px;border-bottom:1px solid var(--line);font-size:1.02rem;min-width:0}
+.keys li::before{content:"";position:absolute;left:2px;top:1.35em;width:8px;height:8px;border-radius:2px;background:var(--sun);transform:rotate(45deg)}
+.keys li b{font-weight:600;color:var(--pine)}
+@media (max-width:860px){.keys{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.keys{grid-template-columns:1fr}}
+
+/* Partenaires */
+.partners{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
+.partner{display:flex;flex-direction:column;gap:10px;padding:22px;border-radius:16px;background:var(--paper);border:1px solid var(--line);min-width:0}
+.partner .k{font-family:var(--f-mono);font-weight:600;font-size:0.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sun-ink)}
+.partner h3{font-size:1.35rem}
+.partner p{font-size:.94rem;color:var(--ink-soft);flex:1}
+.partner address{font-style:normal;font-size:.86rem;line-height:1.5;color:var(--ink);padding-top:12px;border-top:1px solid var(--line);overflow-wrap:anywhere}
+.partner a{color:var(--pine)}
+@media (max-width:1000px){.partners{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.partners{grid-template-columns:1fr}}
+
+/* Méchoui */
+#mechoui{background:var(--band);color:var(--band-fg)}
+#mechoui .eyebrow{color:var(--sun)}
+#mechoui .head p{color:var(--band-soft)}
+.fire{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(24px,4vw,56px);align-items:start}
+.fire-pics{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:260px 260px;gap:12px}
+.fire-pics .pic:first-child{grid-column:span 2}
+.fire-txt{display:flex;flex-direction:column;gap:22px;min-width:0}
+.label-rouge{display:flex;gap:16px;align-items:flex-start;padding:20px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+.label-rouge .seal{flex:none;width:58px;height:58px;border-radius:50%;background:#B3261E;color:#fff;display:grid;place-items:center;text-align:center;font-family:var(--f-mono);font-weight:600;font-size:0.66rem;line-height:1.1;letter-spacing:.06em;box-shadow:inset 0 0 0 3px rgba(255,255,255,.35)}
+.label-rouge h3{font-size:1.3rem}
+.label-rouge p{color:var(--band-soft);margin-top:6px;font-size:.96rem}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cols h4{margin:0 0 8px;font-family:var(--f-mono);font-size:0.87rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sun);font-weight:600}
+.cols ul{margin:0;padding:0;list-style:none}
+.cols li{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:.98rem}
+.partner-note{color:var(--band-fg);font-size:1rem;line-height:1.6}
+.note{font-size:.88rem;color:var(--band-soft)}
+@media (max-width:900px){.fire{grid-template-columns:1fr}}
+@media (max-width:520px){.fire-pics{grid-template-rows:200px 180px}.cols{grid-template-columns:1fr}}
+
+/* Espaces */
+.espaces-more{max-width:56rem;margin:-8px 0 clamp(32px,4vw,48px);font-size:1.05rem;line-height:1.7;color:var(--ink-soft)}
+#espaces{background:var(--paper)}
+.room{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(22px,4vw,56px);align-items:center;padding-block:clamp(22px,3vw,34px);border-top:1px solid var(--line)}
+.room:first-of-type{border-top:0;padding-top:0}
+.room.flip .pics{order:2}
+.room .pics{display:grid;grid-template-columns:2fr 1fr;gap:12px;height:clamp(240px,32vw,380px)}
+.room .pics.one{grid-template-columns:1fr}
+.room .txt{display:flex;flex-direction:column;gap:14px;min-width:0}
+.room h3{font-size:clamp(1.6rem,2.6vw,2.1rem)}
+.tag{font-family:var(--f-mono);font-weight:600;font-size:0.9rem;color:var(--sun-ink);letter-spacing:.06em}
+.ticks{margin:4px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}
+.ticks li{position:relative;padding-left:18px;font-size:.95rem;color:var(--ink-soft)}
+.ticks li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;border-radius:2px;background:var(--sun);transform:rotate(45deg)}
+@media (max-width:860px){.room{grid-template-columns:1fr}.room.flip .pics{order:0}}
+@media (max-width:460px){.ticks{grid-template-columns:1fr}}
+
+/* Couchages */
+.bed-intro{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,36px);margin:-8px 0 clamp(28px,4vw,44px);color:var(--ink-soft);font-size:.98rem}
+.honest{align-self:start;padding:16px 18px;border-radius:12px;border:2px solid var(--sun);background:color-mix(in srgb,var(--sun) 14%,var(--paper));display:flex;flex-direction:column;gap:6px}
+.honest-k{font-family:var(--f-mono);font-weight:700;font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sun-ink)}
+.honest p{color:var(--ink);font-weight:500}
+@media (max-width:860px){.bed-intro{grid-template-columns:1fr}}
+.beds{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:clamp(28px,4vw,44px)}
+.beds .pic{aspect-ratio:3/4}
+@media (max-width:860px){.beds{grid-template-columns:repeat(3,1fr)}.beds .pic:nth-child(n+4){display:none}}
+.tablebox{overflow-x:auto;background:var(--paper);border-radius:16px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;min-width:640px;font-size:.95rem}
+table.recap caption{caption-side:top;text-align:left;padding:16px 18px 12px;font-family:var(--f-mono);font-weight:700;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+th,td{text-align:left;padding:11px 18px;border-bottom:1px solid var(--line);vertical-align:middle}
+thead th{background:var(--pine);color:var(--paper);font-family:var(--f-mono);font-weight:700;font-size:.92rem;letter-spacing:.04em}
+td:last-child,th:last-child{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.grp{font-weight:500;border-right:1px solid var(--line)}
+td.grp small{display:block;color:var(--ink-soft);font-size:.82rem;margin-top:4px;font-weight:400}
+tr.sub td{background:color-mix(in srgb,var(--sun) 22%,var(--paper));font-weight:700}
+tr.total td{background:var(--pine);color:var(--paper);font-family:var(--f-display);font-size:1.15rem;border-bottom:0}
+.san{display:inline-flex;gap:3px;vertical-align:-3px;margin-left:6px;color:var(--pine)}
+.ico{width:18px;height:18px;flex:none}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;font-size:.88rem;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend .ico{color:var(--pine)}
+.sheets{margin-top:18px;padding:18px 22px;border-radius:14px;border:2px solid var(--sun);background:color-mix(in srgb,var(--sun) 12%,var(--paper));display:flex;flex-direction:column;gap:6px}
+.sheets b{font-size:1.15rem;font-weight:700;letter-spacing:.02em;text-decoration:underline;text-underline-offset:4px;color:var(--ink)}
+.sheets p{color:var(--ink-soft);font-size:.96rem}
+
+/* Dehors */
+#dehors{background:var(--paper)}
+.out{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,24px)}
+.spot{display:flex;flex-direction:column;gap:10px;min-width:0}
+.spot .pic{aspect-ratio:4/3}
+.spot h3{font-size:1.28rem}
+.spot p{font-size:.93rem;color:var(--ink-soft)}
+.games{margin-top:clamp(28px,4vw,44px);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.games span{padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);font-size:.93rem}
+.games .eyebrow{margin-right:6px}
+@media (max-width:960px){.out{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.out{grid-template-columns:1fr}}
+
+/* Occasions */
+.must-read{display:inline-flex;margin-top:16px;padding:10px 16px;border-radius:10px;border:2px solid var(--sun);background:color-mix(in srgb,var(--sun) 14%,var(--paper));font-weight:600;font-size:.98rem;color:var(--ink)}
+.occ-txt{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,5vw,72px);margin-bottom:clamp(28px,4vw,40px);color:var(--ink-soft)}
+@media (max-width:960px){.occ-txt{grid-template-columns:1fr}}
+.occ{display:flex;flex-wrap:wrap;gap:10px}
+.occ span{padding:12px 20px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper)}
+.occ b{font-weight:600;color:var(--pine)}
+
+/* Galerie */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(150px,18vw,230px);gap:12px}
+.gallery .pic:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gallery .pic:nth-child(4){grid-row:span 2}
+@media (max-width:700px){.gallery{grid-template-columns:1fr 1fr}.gallery .pic:nth-child(4){grid-row:auto}}
+
+/* Réserver */
+#reserver{background:var(--pine);color:var(--paper)}
+#reserver .eyebrow{color:var(--sun)}
+#reserver .head p{color:color-mix(in srgb,var(--paper) 78%,transparent)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);column-gap:28px;row-gap:44px;counter-reset:s}
+.step{padding:26px 26px 26px 0;border-top:1.5px solid color-mix(in srgb,var(--paper) 30%,transparent);position:relative;min-width:0}
+.step::before{counter-increment:s;content:counter(s);position:absolute;top:-17px;left:0;width:32px;height:32px;border-radius:50%;background:var(--sun);color:#1F2A24;font-family:var(--f-mono);font-weight:600;font-size:1rem;display:grid;place-items:center}
+.step h3{font-size:1.32rem;margin-top:20px}
+.step p{margin-top:10px;font-size:.95rem;color:color-mix(in srgb,var(--paper) 80%,transparent)}
+.good-h{margin-top:clamp(40px,5vw,60px);font-family:var(--f-display);font-weight:400;font-size:1.6rem}
+.good{margin-top:18px;display:grid;grid-template-columns:1fr;gap:12px;max-width:860px}
+.good div.wide{grid-column:span 2}
+.good ul{margin:6px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.good .alert-soft{border-color:color-mix(in srgb,var(--sun) 55%,transparent)}
+.good .star{background:color-mix(in srgb,var(--sun) 22%,transparent);border-color:color-mix(in srgb,var(--sun) 55%,transparent)}
+.good u{text-underline-offset:4px;font-weight:600}
+.good .alert b{text-decoration:underline;text-underline-offset:4px;font-weight:600}
+.good div{padding:18px 20px;border-radius:14px;background:color-mix(in srgb,var(--paper) 8%,transparent);border:1px solid color-mix(in srgb,var(--paper) 16%,transparent);font-size:.95rem}
+.good b{display:block;font-family:var(--f-display);font-weight:400;font-size:1.15rem;margin-bottom:4px}
+@media (max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.steps,.good{grid-template-columns:1fr}.good div.wide{grid-column:auto}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) #reserver{background:#22382D;color:var(--ink)}}
+:root[data-theme="dark"] #reserver{background:#22382D;color:var(--ink)}
+
+/* Accès */
+.access{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center}
+.dist{list-style:none;margin:24px 0 0;padding:0;border-top:1px solid var(--line)}
+.dist li{display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-bottom:1px solid var(--line)}
+.dist li span:last-child{font-family:var(--f-mono);font-weight:600;color:var(--pine);white-space:nowrap}
+.access .pic{aspect-ratio:4/3}
+@media (max-width:860px){.access{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq{max-width:820px;margin-top:28px}
+.faq-g{font-family:var(--f-mono);font-weight:600;font-size:0.9rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sun-ink);margin:36px 0 4px}
+.faq-g:first-child{margin-top:0}
+.faq details{border-bottom:1px solid var(--line);padding:4px 0}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;padding:16px 0;font-family:var(--f-display);font-size:1.22rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--f-mono);font-weight:600;color:var(--sun-ink);font-size:1.3rem;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 0 18px;color:var(--ink-soft);max-width:44rem}
+
+/* Contact */
+#contact{background:var(--paper)}
+.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,72px)}
+.contact .side{display:flex;flex-direction:column;gap:18px;min-width:0}
+.contact .side p{color:var(--ink-soft)}
+.coord{display:flex;flex-direction:column;gap:4px;font-size:.98rem}
+.coord span{font-family:var(--f-mono);font-weight:600;font-size:0.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-top:12px}
+form{background:var(--stone);border-radius:20px;padding:clamp(22px,3vw,36px);display:grid;grid-template-columns:1fr 1fr;gap:16px;min-width:0}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+label,.lbl{font-size:.85rem;font-weight:500;color:var(--ink-soft)}
+input,select,textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;width:100%;min-width:0}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pine)}
+textarea{min-height:130px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips label{padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);cursor:pointer;color:var(--ink);font-size:.92rem}
+.chips input:checked+label{background:var(--pine);border-color:var(--pine);color:var(--paper)}
+.chips input:focus-visible+label{outline:2px solid var(--sun);outline-offset:2px}
+form .btn{grid-column:1/-1;justify-content:center;padding:15px 22px;font-size:1rem}
+.alt{grid-column:1/-1;text-align:center;font-size:.92rem;color:var(--ink-soft)}
+.alt a{color:var(--ink);text-underline-offset:3px;word-break:break-all}
+.alt button{background:none;border:0;padding:4px;font:inherit;color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.wa{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:12px 20px;border-radius:999px;background:var(--pine);color:var(--paper);text-decoration:none;font-weight:600;font-size:.95rem}
+.phone{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.phone a{font-variant-numeric:tabular-nums;user-select:all}
+.sent{grid-column:1/-1;padding:16px 18px;border-radius:12px;background:color-mix(in srgb,var(--pine) 14%,var(--paper))}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+@media (max-width:520px){form{grid-template-columns:1fr}}
+
+footer{background:var(--band);color:var(--band-fg)}
+footer .wrap{padding-block:48px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:flex-end}
+footer b{font-family:var(--f-display);font-weight:400;font-size:1.5rem}
+footer p{font-size:.9rem;color:var(--band-soft)}
+
+.gtabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.gtab{font-family:var(--f-mono);font-weight:600;font-size:.95rem;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.gtab.on{background:var(--pine);color:var(--paper);border-color:var(--pine)}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.gitem{padding:0;border:0;border-radius:12px;overflow:hidden;aspect-ratio:4/3;cursor:zoom-in;background:color-mix(in srgb,var(--pine) 14%,var(--paper))}
+.gitem img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.gitem:hover img{transform:scale(1.04)}
+.gitem.hide{display:none}
+@media (max-width:900px){.gal{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:600px){.gal{grid-template-columns:1fr 1fr;gap:8px}}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(10,14,12,.94);display:flex;align-items:center;justify-content:center}
+.lb[hidden]{display:none}
+.lb figure{margin:0;max-width:92vw;max-height:88vh;text-align:center}
+.lb img{max-width:92vw;max-height:80vh;object-fit:contain;border-radius:8px}
+.lb figcaption{color:#ECE8DE;font-family:var(--f-mono);font-weight:600;margin-top:12px;font-size:1rem}
+.lb button{position:absolute;background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:999px;width:48px;height:48px;font-size:2rem;line-height:1;cursor:pointer}
+.lb-x{top:16px;right:16px}.lb-p{left:12px;top:50%;transform:translateY(-50%)}.lb-n{right:12px;top:50%;transform:translateY(-50%)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#accueil" aria-label="Les Terrasses du Châtelard, accueil">
+      <svg width="36" height="36" viewBox="0 0 38 38" aria-hidden="true"><circle cx="19" cy="19" r="18" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="25" cy="13" r="3.4" fill="var(--sun)"/><path d="M4 26 L12 18 L17 22 L23 15 L34 26 Z" fill="var(--pine)"/><path d="M8 29 H30 M10 32 H28" stroke="currentColor" stroke-width="1.4"/></svg>
+      <b>Les Terrasses<br>du Châtelard</b>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 8h20M3 13h20M3 18h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <nav class="links" id="nav">
+      <a href="#esprit">L'esprit</a>
+      <a class="nav-must" href="#occasions">Notre philosophie <span class="nav-tag">À lire</span></a>
+      <a href="#espaces">Les espaces</a>
+      <a href="#couchages">Couchages</a>
+      <a href="#dehors">Extérieurs</a>
+      <a href="#mechoui">Le méchoui</a>
+      <a href="#galerie">Galerie photo</a>
+      <a href="#reserver">Réserver</a>
+      <a class="btn" href="#contact">Demander un devis</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="accueil" style="padding:0">
+  <div class="wrap hero-top">
+    <div class="eyebrow">Domaine privé · Gîte de groupe · Entre Alpes et Provence</div>
+    <h1>Les Terrasses du Châtelard</h1>
+    <div class="slogan">360° de bonheur partagé</div>
+  </div>
+  <figure class="hero-photo"><img src="images/hero.jpg" alt="Le domaine des Terrasses du Châtelard, seul au milieu des champs, face aux Alpes enneigées" fetchpriority="high"></figure>
+</section>
+
+<div class="facts">
+  <div class="wrap">
+    <div class="row">
+      <div class="fact"><div class="n">60</div><div class="l">couchages au total</div></div>
+      <div class="fact"><div class="n">12</div><div class="l">espaces de couchage</div></div>
+      <div class="fact"><div class="n">8</div><div class="l">salles de bain</div></div>
+      <div class="fact"><div class="n">100</div><div class="l">places assises dans la grande salle 4 saisons de 150 m²</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="wrap hero-intro">
+    <div class="txt">
+      <div class="sub">Gîte de groupe en gestion libre · 60 couchages · 100 convives</div>
+      <p>Mariages, anniversaires, réunions de famille, séjours entre amis, séminaires : notre domaine est entièrement pensé et aménagé pour accueillir vos événements et vos moments de partage. Au milieu des champs, sans voisinage, cet ancien corps de ferme rénové cultive une ambiance rustique et champêtre, empreinte de la France d'antan. Un lieu authentique, simple et fonctionnel, destiné à ceux qui partagent notre goût pour la convivialité, les traditions et les plaisirs de la bonne franquette.</p>
+    </div>
+    <div class="cta">
+      <a class="btn" href="#contact">Demander un devis</a>
+      <a class="btn line" href="#esprit">Découvrir le domaine</a>
+    </div>
+  </div>
+</div>
+
+<section id="esprit">
+  <div class="wrap story">
+    <div class="txt">
+      <div class="eyebrow">Le domaine</div>
+      <h2>Un domaine nature et authentique pour se retrouver en toute simplicité</h2>
+      <p>Seul au milieu des lavandes, posé sur une butte qui domine les paysages environnants, le domaine offre une vue à 360° : les Alpes d'un côté, Sisteron, porte de la Provence, de l'autre.</p>
+      <p>Pendant près de quatorze ans, nous avons entièrement rénové ce corps de ferme vieux de près de 300 ans. Si la rénovation a été réalisée avec des techniques modernes, nous avons pris un soin particulier à préserver son âme et son caractère d'autrefois. Tomettes anciennes, poutres de chêne patinées par le temps, bois, pierres et matériaux d'origine ont été récupérés, restaurés puis replacés un à un. Chaque détail a été pensé pour recréer l'atmosphère d'une maison d'autrefois, au point de donner l'impression que le temps s'y est arrêté.</p>
+      <p>Ici, nous n'avons pas cherché le luxe, mais l'authenticité. Celle d'une rénovation patiemment menée à l'huile de coude, nourrie d'idées, d'imagination et de beaucoup d'amour. Un lieu façonné au fil des années, en pleine nature, pensé pour les grandes tablées, les retrouvailles et les moments qui s'éternisent.</p>
+      <p>Un agneau qui tourne lentement au feu de bois, un cochon qui dore doucement à la broche, quelques poulets qui grillent, les rires qui fusent autour d'une grande tablée et les parties de pétanque qui se prolongent bien après le coucher du soleil… Ici, on cultive le goût des bonnes choses et le plaisir d'être ensemble.</p>
+      <p>Un lieu simple, généreux et hors du temps, fait pour se retrouver, partager et profiter pleinement d'être ensemble.</p>
+    </div>
+    <div class="mosaic">
+      <figure class="pic"><img src="images/ferme.jpg" alt="Le corps de ferme et les montagnes" loading="lazy"></figure>
+      <figure class="pic"><img src="images/salon.jpg" alt="Salon de caractère, tomettes et poutres" loading="lazy"></figure>
+      <figure class="pic"><img src="images/arcenciel.jpg" alt="Arc-en-ciel sur les champs du domaine" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<section id="espaces">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Les espaces</div>
+        <h2>Un domaine convivial et fonctionnel</h2>
+      </div>
+      <p>Le domaine se loue en gestion libre : tous les espaces, intérieurs et extérieurs, sont à votre disposition pendant toute la durée du séjour.</p>
+    </div>
+    <p class="espaces-more">Même avec plus de 100 invités, vous n'aurez jamais l'impression d'être les uns sur les autres. On se retrouve à l'ombre d'une des deux grandes pergolas ou sous les acacias, on refait le monde au coin méchoui, on improvise une partie de pétanque au boulodrome, de ping-pong ou de puissance 4 géant au coin détente, on trinque au bar, on s'affronte aux échecs géants face à une vue imprenable, ou au billard et au baby-foot dans la salle de jeux. Chacun trouve son coin, et tout le monde se retrouve sur la grande terrasse pour les repas et la fête.</p>
+
+    <article class="room">
+      <div class="pics">
+        <figure class="pic"><img src="images/terrasse.jpg" alt="Grande terrasse couverte dressée pour un repas" loading="lazy"></figure>
+        <figure class="pic"><img src="images/pizza.jpg" alt="Four à pizza au feu de bois" loading="lazy"></figure>
+      </div>
+      <div class="txt">
+        <div class="tag">Jusqu'à 100 personnes · utilisable toute l'année</div>
+        <h3>La grande terrasse couverte</h3>
+        <p class="muted">Les repas, les buffets, la piste de danse, le bar : tout se passe sur cette grande terrasse entièrement couverte, sol en pierre et plafond de canisses, juste à côté de la cuisine.</p>
+        <ul class="ticks"><li>Four à pizza au feu de bois</li><li>Tables et chaises pour 60 personnes</li><li>Accès direct cuisine et bar</li><li>Vaisselier à côté</li><li>Toilettes, lavabos, eau chaude</li></ul>
+      </div>
+    </article>
+
+    <article class="room flip">
+      <div class="pics one">
+        <figure class="pic"><img src="images/cuisine.jpg" alt="Cuisine semi-professionnelle équipée avec piano gaz et hotte" loading="lazy" style="object-position:center 30%"></figure>
+      </div>
+      <div class="txt">
+        <div class="tag">Équipée pour des groupes jusqu'à 60 personnes</div>
+        <h3>La cuisine semi-professionnelle équipée</h3>
+        <p class="muted">Une cuisine semi-professionnelle entièrement équipée, pour vos cuistots comme pour votre traiteur, avec la vaisselle pour 60 personnes.</p>
+        <ul class="ticks"><li>Piano gaz 5 feux</li><li>2 fours électriques</li><li>Four de remise en température</li><li>Lave-vaisselle professionnel</li><li>Plans de travail et plonge inox</li><li>2 réfrigérateurs verticaux + plan de travail réfrigéré 4 portes</li><li>Vaisselle, couverts et verres pour 60</li></ul>
+      </div>
+    </article>
+
+    <article class="room">
+      <div class="pics one">
+        <figure class="pic"><img src="images/bar.jpg" alt="Le grand comptoir du bar" loading="lazy"></figure>
+      </div>
+      <div class="txt">
+        <div class="tag">Apéritif et fins de soirée</div>
+        <h3>Le bar</h3>
+        <p class="muted">Un comptoir en bois de 5 mètres de long, entièrement équipé pour servir les boissons, qui donne sur le coin détente.</p>
+        <ul class="ticks"><li>Comptoir de 5 mètres de long</li><li>2 machines à glaçons</li><li>2 réfrigérateurs + plan de travail vitrine réfrigérée 3 portes</li><li>Congélateur coffre</li><li>Verrerie disponible</li><li>Cafetières filtre et Senseo</li></ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="couchages">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Les couchages</div>
+        <h2>60 couchages : 2 chambres VIP, 8 dortoirs et 2 mini-chambres atypiques</h2>
+      </div>
+      <p>Avec ses 60 couchages, le domaine est très fonctionnel pour les grands groupes : tout le monde dort sur place, et personne n'a à reprendre la voiture après la fête.</p>
+    </div>
+    <div class="bed-intro">
+      <div class="honest" role="note"><span class="honest-k">⚠ À lire attentivement</span><p>Nous tenons à être honnêtes et transparents : les couchages restent simples. Nous avons fait le choix d'une ambiance rustique, fidèle à l'esprit du lieu.</p></div>
+      <p>Le domaine compte deux chambres VIP très confortables, deux mini-chambres doubles atypiques aménagées dans les anciennes dépendances, et huit dortoirs aux caractéristiques différentes. Parfait pour un week-end festif, à condition de ne pas chercher dans un dortoir l'intimité d'une chambre d'hôtel : ici, on dort comme on fait la fête, ensemble.</p>
+      <p>Nous comprenons parfaitement que tout le monde ne soit pas adepte des dortoirs et que certains préfèrent conserver un peu plus d'intimité ou de confort pendant leur séjour. Si c'est le cas de certains de vos invités, sachez que la mairie de Thèze propose deux gîtes communaux, auxquels s'ajoutent quelques logements privés dans le village et ses environs.</p>
+    </div>
+    <div class="beds">
+      <figure class="pic"><img src="images/patrons.jpg" alt="Chambre VIP de l'Appartement des Patrons" loading="lazy"><figcaption>Patrons</figcaption></figure>
+      <figure class="pic"><img src="images/copains.jpg" alt="Espace de vie de l'Appartement des Copains" loading="lazy"><figcaption>Copains</figcaption></figure>
+      <figure class="pic"><img src="images/dortoir.jpg" alt="Un dortoir annexe" loading="lazy"><figcaption>Dortoir</figcaption></figure>
+      <figure class="pic"><img src="images/voute.jpg" alt="Dortoir voûté à compartiments" loading="lazy"><figcaption>Voûte</figcaption></figure>
+      <figure class="pic"><img src="images/mini.jpg" alt="Une mini-chambre atypique" loading="lazy"><figcaption>Mini-chambre</figcaption></figure>
+    </div>
+    <div class="tablebox">
+      <table class="recap">
+        <caption>Récapitulatif des hébergements</caption>
+        <thead><tr><th>Hébergement</th><th>Chambre / espace</th><th>Composition des lits</th><th>Couchages</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="3" class="grp">Appartement des Patrons</td><td>Chambre VIP 1 <span class="san" title="douche et WC privatifs" aria-label="douche et WC privatifs"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V8a4 4 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M9 9h6l-3 3z" fill="currentColor"/><path d="M10 15v1.5M12 15v3M14 15v1.5M11 19v1M13 19v1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h5v7H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 10h14a7 7 0 0 1-7 7h-1l-1 4h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg></span></td><td>1 grand lit 160</td><td>2</td></tr>
+          <tr><td>Chambre VIP 2 <span class="san" title="douche et WC privatifs" aria-label="douche et WC privatifs"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V8a4 4 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M9 9h6l-3 3z" fill="currentColor"/><path d="M10 15v1.5M12 15v3M14 15v1.5M11 19v1M13 19v1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h5v7H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 10h14a7 7 0 0 1-7 7h-1l-1 4h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg></span></td><td>1 grand lit 140</td><td>2</td></tr>
+          <tr><td>Chambre du fond du couloir <span class="san" title="WC" aria-label="WC"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h5v7H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 10h14a7 7 0 0 1-7 7h-1l-1 4h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg></span></td><td>1 lit superposé</td><td>2</td></tr>
+          <tr class="sub"><td colspan="3">Total Appartement des Patrons</td><td>6</td></tr>
+          <tr><td rowspan="3" class="grp">Appartement des Copains <span class="san" title="douche et WC communs" aria-label="douche et WC communs"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V8a4 4 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M9 9h6l-3 3z" fill="currentColor"/><path d="M10 15v1.5M12 15v3M14 15v1.5M11 19v1M13 19v1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h5v7H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 10h14a7 7 0 0 1-7 7h-1l-1 4h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg></span><small>Salle de bain et WC communs à l'appartement</small></td><td>Chambre principale — compartiment 1</td><td>1 GL 140 + 1 PL 90</td><td>3</td></tr>
+          <tr><td>Chambre principale — compartiment 2</td><td>1 GL 140 + 2 PL 90</td><td>4</td></tr>
+          <tr><td>Coin montagne</td><td>1 GL 140 + 1 PL 90</td><td>3</td></tr>
+          <tr class="sub"><td colspan="3">Total Appartement des Copains</td><td>10</td></tr>
+          <tr><td colspan="2">Dortoir – Appartement Cinéma <span class="san" title="douche, WC" aria-label="douche, WC"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V8a4 4 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M9 9h6l-3 3z" fill="currentColor"/><path d="M10 15v1.5M12 15v3M14 15v1.5M11 19v1M13 19v1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h5v7H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 10h14a7 7 0 0 1-7 7h-1l-1 4h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg></span></td><td>4 GL 140 + 1 PL 90</td><td>9</td></tr>
+          <tr><td colspan="2">Dortoir annexe Sud-Est <span class="san" title="baignoire, WC" aria-label="baignoire, WC"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18v2a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 12V6a2 2 0 0 1 4 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 19l-1 2M17 19l1 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h5v7H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 10h14a7 7 0 0 1-7 7h-1l-1 4h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg></span></td><td>3 LSP + 1 PL 90</td><td>7</td></tr>
+          <tr><td colspan="2">Dortoir annexe PMR <span class="san" title="douche, WC, accessible PMR" aria-label="douche, WC, accessible PMR"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V8a4 4 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M9 9h6l-3 3z" fill="currentColor"/><path d="M10 15v1.5M12 15v3M14 15v1.5M11 19v1M13 19v1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h5v7H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 10h14a7 7 0 0 1-7 7h-1l-1 4h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="4" r="2" fill="currentColor"/><path d="M11 7v6h5l2 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.5 10.5a5.5 5.5 0 1 0 7 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></td><td>3 GL 140 + 2 PL 90</td><td>8</td></tr>
+          <tr><td colspan="2">Dortoir annexe voûte à compartiments</td><td>3 GL 140 + 1 GL 160 + 1 PL 90</td><td>9</td></tr>
+          <tr><td colspan="2">Dortoir annexe Bouteilles</td><td>3 LSP + 1 PL 90</td><td>7</td></tr>
+          <tr><td rowspan="2" class="grp">Mini-chambres atypiques</td><td>Mini-chambre 1</td><td>1 GL 140</td><td>2</td></tr>
+          <tr><td>Mini-chambre 2</td><td>1 GL 140</td><td>2</td></tr>
+          <tr class="total"><td colspan="3">Total général</td><td>60 couchages</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="legend"><span><b>GL</b> = grand lit</span><span><b>PL</b> = petit lit</span><span><b>LSP</b> = lit superposé</span><span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V8a4 4 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M9 9h6l-3 3z" fill="currentColor"/><path d="M10 15v1.5M12 15v3M14 15v1.5M11 19v1M13 19v1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg> douche</span><span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18v2a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 12V6a2 2 0 0 1 4 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 19l-1 2M17 19l1 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> baignoire</span><span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h5v7H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 10h14a7 7 0 0 1-7 7h-1l-1 4h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg> WC</span><span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="4" r="2" fill="currentColor"/><path d="M11 7v6h5l2 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.5 10.5a5.5 5.5 0 1 0 7 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> accessible PMR</span><span>Sans pictogramme : pas de sanitaires dans l'espace</span></p>
+    <div class="sheets" role="note"><b>⚠ Attention : DRAPS NON FOURNIS</b><p>Les couettes et les oreillers sont présents. Merci de remettre chaque couette et chaque oreiller à sa place avant l'état des lieux de fin de séjour.</p></div>
+  </div>
+</section>
+
+<section id="dehors">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Espaces extérieurs</div>
+        <h2>Des coins et des recoins pour tous les moments de la journée</h2>
+      </div>
+      <p>Les pergolas, le boulodrome avec ses deux terrains de pétanque, le jeu d'échecs géant au sommet de la colline : de nombreux espaces pensés pour les groupes, de l'apéritif jusqu'à tard dans la nuit.</p>
+    </div>
+    <div class="out">
+      <article class="spot"><figure class="pic"><img src="images/boules.jpg" alt="Le boulodrome" loading="lazy"></figure><h3>Le boulodrome</h3><p>Deux terrains de pétanque, un grand banc de 8 m à l'ombre et un éclairage pour jouer le soir.</p></article>
+      <article class="spot"><figure class="pic"><img src="images/echecs.jpg" alt="Échecs géants face aux Alpes" loading="lazy"></figure><h3>Les échecs géants</h3><p>Au point le plus haut du domaine, avec un panorama à 360° des Alpes jusqu'à Sisteron.</p></article>
+      <article class="spot"><figure class="pic"><img src="images/ceremonie.jpg" alt="Cérémonie laïque sous les acacias" loading="lazy"></figure><h3>Les Acacias</h3><p>Un espace arboré à l'ombre naturelle, idéal pour une cérémonie laïque ou un repas ombragé.</p></article>
+      <article class="spot"><figure class="pic"><img src="images/pergola.jpg" alt="La grande pergola" loading="lazy"></figure><h3>Les pergolas</h3><p>Une grande pergola protégée des intempéries et une petite pergola ouverte sur les champs.</p></article>
+      <article class="spot"><figure class="pic"><img src="images/detente.jpg" alt="Le coin détente à la sortie du bar" loading="lazy"></figure><h3>Le coin détente</h3><p>À la sortie du bar, avec son mobilier extérieur.</p></article>
+      <article class="spot"><figure class="pic"><img src="images/bassin.jpg" alt="Le mini-bassin et sa terrasse en bois" loading="lazy"></figure><h3>Le mini-bassin</h3><p>Un petit bassin d'agrément de moins de 10 m², au calme, pour se rafraîchir.</p></article>
+      <article class="spot"><figure class="pic"><img src="images/jeux.jpg" alt="Billard et baby-foot dans la salle de jeux" loading="lazy"></figure><h3>La salle de jeux</h3><p>Billard, baby-foot, piscine à balles, écran de projection et 33 chaises en bois.</p></article>
+      <article class="spot"><figure class="pic"><img src="images/escalier.jpg" alt="Escalier en pierre fleuri" loading="lazy"></figure><h3>Les vieilles pierres</h3><p>Escaliers, restanques et chemins en pierre sèche relient les différents espaces du domaine.</p></article>
+    </div>
+    <div class="games">
+      <span class="eyebrow">Jeux à disposition</span>
+      <span>Ping-pong</span><span>Badminton</span><span>Puissance 4 géant</span><span>Mölkky</span><span>Mikados géants</span>
+    </div>
+  </div>
+</section>
+
+<section id="mechoui">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Notre spécialité</div>
+        <h2>Le méchoui</h2>
+      </div>
+      <p>Le méchoui, c'est une cuisson spectacle qui réunit tout le monde autour du feu. L'agneau et le cochon tournent lentement à la broche pendant environ sept heures, sous les yeux des invités, arrosés avec des branches de romarin.</p>
+    </div>
+    <div class="fire">
+      <div class="fire-pics">
+        <figure class="pic"><img src="images/mechoui.jpg" alt="Agneaux et cochon à la broche devant le feu" loading="lazy"></figure>
+        <figure class="pic"><img src="images/mechoui2.jpg" alt="Cuisson à la broche" loading="lazy"></figure>
+        <figure class="pic"><img src="images/mechoui3.jpg" alt="Le barbecue couvert éclairé le soir" loading="lazy"></figure>
+      </div>
+      <div class="fire-txt">
+        <p class="partner-note">Ici, le méchoui est bien plus qu'un repas : c'est l'emblème de la maison. Agneau de Sisteron ou cochon à la broche, nous sommes fiers de vous proposer ces longues cuissons au feu de bois, fidèles à la tradition et à l'esprit de la bonne franquette.</p>
+        <div class="label-rouge">
+          <div class="seal">LABEL<br>ROUGE</div>
+          <div>
+            <h3>L'agneau de Sisteron</h3>
+            <p>Une référence de la gastronomie française, élevée juste à côté, reconnue pour la qualité exceptionnelle de sa viande.</p>
+          </div>
+        </div>
+        <div class="cols">
+          <div>
+            <h4>Autres cuissons</h4>
+            <ul><li>Cochon à la broche</li><li>Cochon de lait</li><li>Jambon entier</li><li>Poulets grillés</li><li>Sanglier, selon la saison</li></ul>
+          </div>
+          <div>
+            <h4>Sur place</h4>
+            <ul><li>Barbecue argentin de 1,90 m, grilles fournies</li><li>Grand plan de travail</li><li>Évier</li><li>Éclairage et électricité</li><li>Espace entièrement couvert</li></ul>
+          </div>
+        </div>
+        <p class="note">Prestation méchoui sur devis.</p>
+        <a class="btn" href="#contact" style="align-self:flex-start;background:var(--sun);color:#1F2A24">Demander un devis méchoui</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="occasions">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Notre philosophie</div>
+        <h2>Le domaine est-il fait pour vous ?</h2>
+        <div class="must-read" role="note">⚠ À lire impérativement avant de réserver</div>
+      </div>
+      <p>Le domaine est fait pour les amoureux de la bonne franquette, ceux qui aiment la France d'antan, les vieilles bâtisses en pierre, les méchouis, les cochons grillés et les longues tablées qui se prolongent jusque tard dans la nuit.</p>
+    </div>
+    <div class="occ-txt">
+      <p>Nous aimons accueillir des personnes qui partagent nos valeurs : le respect, l'honnêteté, la confiance, la solidarité, l'amitié et le plaisir simple d'être ensemble. Des gens qui apprécient les lieux authentiques, la nature et cette convivialité qui ne s'achète pas. Ici, pas de luxe ostentatoire ni de décor artificiel : le charme du domaine réside dans sa simplicité, ses grands espaces, sa vue à 360° et sa capacité à réunir du monde dans un cadre exceptionnel.</p>
+      <p>Le domaine se loue en gestion libre, pour que chacun puisse se l'approprier et donner libre cours à ses envies : décoration, organisation, ambiance… Certains y ont organisé des mariages dignes des plus belles réceptions, transformant les lieux en un décor de prestige. Tout est possible, à condition de partir de ce que la maison est vraiment : un corps de ferme historique plein de caractère, au milieu des champs et de la nature.</p>
+      <p>Nous préférons être honnêtes : nous ne proposons pas un palais, mais un lieu avec une âme. Un endroit où l'on vient avant tout pour se retrouver, partager et profiter de la vie, dans un esprit de simplicité, de respect et de convivialité. Si ces valeurs vous parlent, alors vous êtes probablement au bon endroit.</p>
+    </div>
+    <div class="occ">
+      <span><b>Mariages</b> et cérémonies laïques</span>
+      <span><b>Réunions</b> de famille</span>
+      <span><b>Anniversaires</b></span>
+      <span><b>Séjours</b> entre amis</span>
+      <span><b>Stages</b></span>
+      <span><b>Séminaires</b></span>
+    </div>
+  </div>
+</section>
+
+<section id="galerie" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">En images</div>
+    <h2 style="margin:12px 0 20px">Le domaine en photos</h2>
+    <div class="gtabs" role="tablist">
+      <button type="button" class="gtab on" data-f="tout">Tout</button>
+      <button type="button" class="gtab" data-f="domaine">Le domaine</button>
+      <button type="button" class="gtab" data-f="couchages">Couchages</button>
+      <button type="button" class="gtab" data-f="cuisine">Cuisine</button>
+      <button type="button" class="gtab" data-f="terrasse">Terrasse et bar</button>
+      <button type="button" class="gtab" data-f="dehors">Extérieurs</button>
+    </div>
+    <div class="gal">
+      <button type="button" class="gitem" data-c="domaine" aria-label="Le corps de ferme au pied des montagnes"><img src="images/g-maison-loin.jpg" alt="Le corps de ferme au pied des montagnes" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="domaine" aria-label="Le domaine au milieu des champs, face aux Alpes"><img src="images/g-vue-domaine.jpg" alt="Le domaine au milieu des champs, face aux Alpes" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="terrasse" aria-label="Grande tablée dressée sous la terrasse couverte"><img src="images/g-tablee.jpg" alt="Grande tablée dressée sous la terrasse couverte" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Agneau et cochon à la broche"><img src="images/g-mechoui-broches.jpg" alt="Agneau et cochon à la broche" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="La pergola illuminée à la tombée du jour"><img src="images/g-pergola-soir.jpg" alt="La pergola illuminée à la tombée du jour" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="terrasse" aria-label="Le bar et sa table de ping-pong"><img src="images/g-bar-comptoir.jpg" alt="Le bar et sa table de ping-pong" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="La pergola et ses guirlandes, à la nuit tombée"><img src="images/g-pergola-nuit.jpg" alt="La pergola et ses guirlandes, à la nuit tombée" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="domaine" aria-label="Salon aux poutres et tomettes anciennes"><img src="images/g-salon.jpg" alt="Salon aux poutres et tomettes anciennes" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="couchages" aria-label="Dortoir annexe voûte à compartiments"><img src="images/g-alcoves.jpg" alt="Dortoir annexe voûte à compartiments" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="domaine" aria-label="La pergola éclairée à la tombée de la nuit"><img src="images/nuit2.jpg" alt="La pergola éclairée à la tombée de la nuit" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="domaine" aria-label="Vue sur les Alpes enneigées"><img src="images/alpes.jpg" alt="Vue sur les Alpes enneigées" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="domaine" aria-label="La maison en pierre illuminée le soir"><img src="images/nuit.jpg" alt="La maison en pierre illuminée le soir" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="domaine" aria-label="La vallée et les montagnes"><img src="images/vallee.jpg" alt="La vallée et les montagnes" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="domaine" aria-label="Cuisine d'autrefois aux poutres apparentes"><img src="images/cuisineferme.jpg" alt="Cuisine d'autrefois aux poutres apparentes" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="domaine" aria-label="Salle de jeux : billard et baby-foot"><img src="images/g-salle-jeux.jpg" alt="Salle de jeux : billard et baby-foot" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="domaine" aria-label="Allée fleurie le long de la maison"><img src="images/g-allee.jpg" alt="Allée fleurie le long de la maison" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="domaine" aria-label="Le vieux tracteur dans le pré"><img src="images/g-champ-tracteur.jpg" alt="Le vieux tracteur dans le pré" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="couchages" aria-label="Chambre VIP"><img src="images/g-chambre-ancienne.jpg" alt="Chambre VIP" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="couchages" aria-label="Chambre VIP"><img src="images/g-chambre.jpg" alt="Chambre VIP" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="couchages" aria-label="Coin montagne – Appartement des Copains"><img src="images/g-mezzanine-roue.jpg" alt="Coin montagne – Appartement des Copains" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="couchages" aria-label="Coin montagne, lit en mezzanine"><img src="images/g-mezzanine.jpg" alt="Coin montagne, lit en mezzanine" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="couchages" aria-label="Dortoir annexe Sud-Est"><img src="images/g-dortoir-vue.jpg" alt="Dortoir annexe Sud-Est" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="couchages" aria-label="Dortoir annexe PMR"><img src="images/g-dortoir-sdb.jpg" alt="Dortoir annexe PMR" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="couchages" aria-label="Dortoir annexe Bouteilles"><img src="images/g-bouteilles.jpg" alt="Dortoir annexe Bouteilles" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="couchages" aria-label="Dortoir annexe Bouteilles, autre vue"><img src="images/g-bouteilles2.jpg" alt="Dortoir annexe Bouteilles, autre vue" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="couchages" aria-label="Mini-chambre atypique"><img src="images/g-mini.jpg" alt="Mini-chambre atypique" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="cuisine" aria-label="Cuisine semi-professionnelle équipée"><img src="images/g-cuisine.jpg" alt="Cuisine semi-professionnelle équipée" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="cuisine" aria-label="Piano de cuisson et hotte"><img src="images/g-piano.jpg" alt="Piano de cuisson et hotte" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="cuisine" aria-label="Plans de travail, frigos et verrerie"><img src="images/g-cuisine-verres.jpg" alt="Plans de travail, frigos et verrerie" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="terrasse" aria-label="La grande terrasse couverte"><img src="images/g-terrasse-jour.jpg" alt="La grande terrasse couverte" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="terrasse" aria-label="La terrasse couverte, côté fresque"><img src="images/g-terrasse.jpg" alt="La terrasse couverte, côté fresque" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="terrasse" aria-label="La terrasse couverte le soir"><img src="images/g-terrasse-nuit.jpg" alt="La terrasse couverte le soir" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="terrasse" aria-label="Tables dressées sur la terrasse couverte"><img src="images/terrasse2.jpg" alt="Tables dressées sur la terrasse couverte" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="terrasse" aria-label="Le bar, le ping-pong et le puissance 4 géant"><img src="images/g-bar-pingpong.jpg" alt="Le bar, le ping-pong et le puissance 4 géant" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="terrasse" aria-label="Le bar et son comptoir de 5 mètres"><img src="images/g-bar.jpg" alt="Le bar et son comptoir de 5 mètres" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="terrasse" aria-label="Tables pliantes fournies"><img src="images/g-tables.jpg" alt="Tables pliantes fournies" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Méchoui et sa poêlée de légumes"><img src="images/g-mechoui-legumes.jpg" alt="Méchoui et sa poêlée de légumes" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Méchoui au feu de bois"><img src="images/g-mechoui.jpg" alt="Méchoui au feu de bois" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Le coin méchoui et grillade"><img src="images/g-coin-grill.jpg" alt="Le coin méchoui et grillade" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Soirée pizzas au four à bois"><img src="images/g-pizza.jpg" alt="Soirée pizzas au four à bois" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Coin grillade au coucher du soleil"><img src="images/g-grill.jpg" alt="Coin grillade au coucher du soleil" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Les pergolas et le jardin"><img src="images/g-pergolas.jpg" alt="Les pergolas et le jardin" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Pergola, fontaine et vue sur la montagne"><img src="images/g-pergola-fontaine.jpg" alt="Pergola, fontaine et vue sur la montagne" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Coin salon sous la pergola"><img src="images/g-pergola-jardin.jpg" alt="Coin salon sous la pergola" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Transats face aux champs"><img src="images/g-transats.jpg" alt="Transats face aux champs" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Transats au soleil"><img src="images/g-transats2.jpg" alt="Transats au soleil" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Petite terrasse avec vue sur la montagne"><img src="images/g-terrasse-vue.jpg" alt="Petite terrasse avec vue sur la montagne" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Fontaine et table tonneau"><img src="images/g-fontaine.jpg" alt="Fontaine et table tonneau" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="La fontaine éclairée le soir"><img src="images/g-fontaine-nuit.jpg" alt="La fontaine éclairée le soir" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Le boulodrome sous les marronniers en fleurs"><img src="images/g-boulodrome2.jpg" alt="Le boulodrome sous les marronniers en fleurs" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Le boulodrome à l’ombre des marronniers"><img src="images/g-boulodrome.jpg" alt="Le boulodrome à l’ombre des marronniers" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Le boulodrome éclairé"><img src="images/g-boules-nuit.jpg" alt="Le boulodrome éclairé" loading="lazy"></button>
+      <button type="button" class="gitem" data-c="dehors" aria-label="Le mini-bassin à la nuit tombée"><img src="images/g-bassin-nuit.jpg" alt="Le mini-bassin à la nuit tombée" loading="lazy"></button>
+    </div>
+  </div>
+</section>
+<div class="lb" id="lb" hidden>
+  <button type="button" class="lb-x" aria-label="Fermer">×</button>
+  <button type="button" class="lb-p" aria-label="Photo précédente">‹</button>
+  <figure><img alt=""><figcaption></figcaption></figure>
+  <button type="button" class="lb-n" aria-label="Photo suivante">›</button>
+</div>
+
+<section id="reserver">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Réserver</div>
+        <h2>De la première idée au jour J</h2>
+      </div>
+      <p>Une démarche simple et directe : vous parlez au propriétaire, pas à une centrale de réservation.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Votre demande</h3><p>Vos dates, le nombre d'invités et votre projet, via le formulaire ci-dessous.</p></div>
+      <div class="step"><h3>Le devis</h3><p>Nous vous répondons avec un devis détaillé et la brochure complète du domaine.</p></div>
+      <div class="step"><h3>Visite obligatoire</h3><p>La visite du domaine est obligatoire avant la signature du contrat, sur place ou en visio.</p></div>
+      <div class="step"><h3>Le contrat</h3><p>Nous échangeons le contrat signé, suite à quoi un acompte vous est demandé pour valider la réservation.</p></div>
+      <div class="step"><h3>Le solde</h3><p>Le solde de la location est à régler avant votre arrivée, avant l'entrée dans les lieux.</p></div>
+      <div class="step"><h3>Le grand jour</h3><p>Nous vous accueillons pour l'état des lieux d'entrée. Ensuite, le domaine est à vous, en gestion libre.</p></div>
+    </div>
+    <h3 class="good-h">Informations importantes</h3>
+    <div class="good">
+      <div class="star"><b>Horaires flexibles</b>Pas d'horaire imposé : vous pouvez arriver dès le matin le premier jour, et repartir quand vous le souhaitez le dernier jour. Seule condition : que l'état des lieux de départ puisse se faire de jour. De quoi profiter de votre événement sans stress.</div>
+      <div><b>Ménage du corps principal inclus</b>Il s'agit d'un ménage classique, comme après une location de vacances. Si l'état des lieux révèle des dégâts ou des salissures inhabituelles, le nettoyage supplémentaire sera facturé.</div>
+      <div><b>Rangement de base <u>NON INCLUS</u></b>Avant l'état des lieux de départ, merci de :
+        <ul>
+          <li>remettre chaque lit comme à votre arrivée : une couette pliée et un oreiller par lit ;</li>
+          <li>rendre la cuisine, la vaisselle et le bar propres ;</li>
+          <li>remettre toutes les tables, chaises et objets de jardin exactement à leur place ;</li>
+          <li>sur la grande terrasse couverte, ramasser simplement les papiers et vider les poubelles : le nettoyage au Kärcher, c'est nous qui nous en chargeons après votre départ ;</li>
+          <li>faire le tour du domaine pour ramasser les mégots tombés hors des cendriers ;</li>
+          <li>emporter vos poubelles : nous ne prenons pas en charge leur évacuation.</li>
+        </ul>
+        Pour vous faciliter la tâche, un guide de rangement avec photos vous est remis à votre arrivée.</div>
+      <div class="alert"><b>Draps et serviettes NON FOURNIS</b>Pensez à les apporter. Couettes et oreillers sont fournis pour tous les couchages.</div>
+      <div class="alert-soft"><b>Bois, charbon et feu</b>Le bois et le charbon ne sont pas fournis pour le barbecue, le four à pizza et le méchoui. Pour votre sécurité : ne touchez jamais aux cendres, laissez-les dans le four et le barbecue, nous nous en occupons après votre départ. Le feu n'est autorisé que dans les équipements prévus à cet effet : aucun feu de camp ni brasero improvisé.</div>
+      <div><b>Caution de 3000 €</b>Une caution de 3000 € vous est demandée à votre arrivée lors de l'état des lieux d'entrée : par chèque, non encaissé, ou par virement si vous n'avez plus de chéquier. Elle vous est restituée après l'état des lieux de fin de séjour.</div>
+    </div>
+  </div>
+</section>
+
+<section id="acces">
+  <div class="wrap access">
+    <div>
+      <div class="eyebrow">Venir</div>
+      <h2 style="margin-top:12px">À la frontière des Alpes et de la Provence</h2>
+      <p class="muted" style="margin-top:16px;max-width:34rem">Une fois sur le domaine, on a l'impression d'être perdu au milieu de la nature. Et pourtant, la sortie Sisteron Nord de l'A51 n'est qu'à 10 minutes de la maison.</p>
+      <ul class="dist">
+        <li><span>Sortie Sisteron Nord (A51)</span><span>10 min</span></li>
+        <li><span>Gap</span><span>30 min</span></li>
+        <li><span>Aix-en-Provence</span><span>1 h</span></li>
+        <li><span>Gare SNCF et gare routière</span><span>Sisteron</span></li>
+      </ul>
+      <p class="muted" style="margin-top:18px">Les Terrasses du Châtelard, 04200 Thèze. Le plan d'accès vous est envoyé avec la confirmation.</p>
+    </div>
+    <figure class="pic"><img src="images/ferme.jpg" alt="Le domaine vu depuis les champs" loading="lazy"></figure>
+  </div>
+</section>
+
+<section id="son">
+  <div class="wrap" style="max-width:46rem">
+    <div class="eyebrow">Musique et niveau sonore</div>
+    <h2 style="margin:12px 0 18px">Peut-on faire la fête toute la nuit ?</h2>
+    <p style="font-family:var(--f-display);font-size:1.25rem;margin:0 0 18px">Oui… mais toujours dans le respect de notre environnement !</p>
+    <p>La tranquillité de nos voisins et la bonne entente avec la mairie de Thèze sont pour nous une priorité absolue. La propriété étant isolée au milieu des champs, sans habitation visible à proximité, vous pouvez profiter de la fête jusqu'au petit matin, à condition de rester attentifs à ceux qui vivent aux alentours.</p>
+    <p>Notre grande terrasse couverte se prête merveilleusement à ces moments de convivialité : musique, danse et ambiance festive sont évidemment les bienvenues ! En revanche, nous ne sommes plus dans l'esprit des soirées où l'on cherche à pousser le son et les basses au maximum. À la campagne, les basses fréquences voyagent particulièrement loin. Nous demandons donc simplement de conserver un niveau raisonnable sur les caissons de basse, et de le réduire si nécessaire.</p>
+    <p>Nous avons accueilli de beaux événements musicaux par le passé, mais nous tenons aujourd'hui à préserver cet équilibre et la confiance qui nous lie à notre voisinage et à la commune.</p>
+  </div>
+</section>
+
+<section id="essentiel">
+  <div class="wrap">
+    <div class="eyebrow">L'essentiel</div>
+    <h2 style="margin:12px 0 28px">Le domaine en un coup d'œil</h2>
+    <ul class="keys">
+      <li>Location en <b>GESTION LIBRE</b></li>
+      <li>60 couchages</li>
+      <li>Grande salle de 150 m², utilisable toute l'année</li>
+      <li>Horaires d'arrivée et de départ flexibles</li>
+      <li>Tables et chaises fournies</li>
+      <li>Cuisine équipée</li>
+      <li>Bar</li>
+      <li>Espace grillade et four à pizza</li>
+      <li>Méchoui</li>
+      <li>Boulodrome</li>
+      <li>Salle de jeux : billard, baby-foot, ping-pong</li>
+      <li>Échecs géants</li>
+      <li>Espace cérémonie sous les acacias</li>
+      <li>Musique autorisée toute la nuit, dans la mesure du raisonnable</li>
+      <li>Accès PMR</li>
+      <li>À 10 minutes de la sortie d'autoroute et du centre commercial Val Durance</li>
+    </ul>
+  </div>
+</section>
+<section id="partenaires" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Nos partenaires</div>
+        <h2>Des artisans du coin, pour vous simplifier la fête</h2>
+      </div>
+      <p>Des producteurs et artisans locaux que nous connaissons bien, et que nous vous recommandons pour vos boissons, votre viande et vos repas.</p>
+    </div>
+    <div class="partners">
+      <article class="partner">
+        <span class="k">Bières</span>
+        <h3>Bière de la Durance</h3>
+        <p>Brasserie artisanale de Sisteron, avec un bel éventail de bières locales (15 références). Les fûts sont livrés directement au domaine et la tireuse est installée sur place : pas de manutention, et pas de poubelles remplies de bouteilles.</p>
+        <address>27 allée des Frênes, 04200 Sisteron<br>04 86 89 32 87 · <a href="https://bieredeladurance.com" target="_blank" rel="noopener">bieredeladurance.com</a></address>
+      </article>
+      <article class="partner">
+        <span class="k">Boucherie-traiteur</span>
+        <h3>Giraud Viandes</h3>
+        <p>L'une des plus grosses boucheries-traiteurs de la région. L'adresse idéale pour vos grillades, mais aussi pour des plats traiteur copieux et savoureux.</p>
+        <address>3 allée des Genêts, Parc d'activités Val de Durance, 04200 Sisteron<br>04 92 61 40 13</address>
+      </article>
+      <article class="partner">
+        <span class="k">Traiteur</span>
+        <h3>Auberge du Prieuré</h3>
+        <p>À Ventavon, un service traiteur sans service à table : des plats de saison, frais et savoureux, à prix raisonnables, livrés ou à venir chercher.</p>
+        <address>Le Village, 05300 Ventavon<br>04 92 57 79 60 · <a href="https://www.aubergedeventavon.com" target="_blank" rel="noopener">aubergedeventavon.com</a></address>
+      </article>
+      <article class="partner">
+        <span class="k">Pain</span>
+        <h3>Nicolas, boulanger à Thèze</h3>
+        <p>Un boulanger passionné, installé à Thèze et réputé dans toute la vallée pour ses pains au levain, façonnés à partir d'une sélection de farines biologiques. Il travaille uniquement sur commande, sans boutique : pensez à commander votre pain à l'avance.</p>
+        <address>Sur commande uniquement<br>06 21 58 45 27</address>
+      </article>
+      <article class="partner">
+        <span class="k">Vins</span>
+        <h3>Domaine de Tresbaudon</h3>
+        <p>À Tallard, des vins locaux de qualité, en vrac ou en bouteille, à des prix très raisonnables pour accompagner vos tablées.</p>
+        <address>2030 route de Tresbaudon, 05130 Tallard<br>04 92 54 19 28 · <a href="https://www.domaine-de-tresbaudon.com" target="_blank" rel="noopener">domaine-de-tresbaudon.com</a></address>
+      </article>
+    </div>
+  </div>
+</section>
+<section id="questions" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">Questions</div>
+    <h2 style="margin-top:12px">Ce qu'on nous demande souvent</h2>
+    <div class="faq">
+      <h3 class="faq-g">Réservation</h3>
+      <details><summary>Pourquoi la visite est-elle obligatoire ?</summary><p>Pour que personne ne soit déçu. Après le devis, nous vous montrons le domaine exactement tel qu'il sera pour votre événement, dans les moindres détails. La visite se fait en deux temps. Nous vous accompagnons d'abord dans tous les espaces, puis nous vous laissons le temps de tout regarder tranquillement, de vous projeter et d'imaginer le plan de couchage de votre groupe. C'est le moment le plus important : vous savez précisément ce que vous réservez et pour quel prix. Aucun contrat n'est donc signé, et aucun acompte versé, sans cette visite, idéalement sur place, ou au minimum en visio.</p></details>
+      <details><summary>Peut-on revenir visiter le domaine avant notre événement ?</summary><p>Oui, autant de fois que vous le souhaitez, et c'est même encore mieux : vous vous appropriez le lieu, et le jour J, vous vous sentez déjà un peu chez vous. C'est très utile pour un mariage, par exemple pour faire des photos ou prendre des mesures pour la décoration. Ces visites se font de préférence en semaine, les week-ends étant réservés aux locations.</p></details>
+      <details><summary>Peut-on se faire livrer ou déposer des choses avant l'événement ?</summary><p>Oui. Vous pouvez faire livrer ou déposer des choses en semaine avant votre événement, même si vous n'êtes pas là : vin, champagne, décoration… Nous sommes flexibles, tant que cela reste raisonnable : pas de palettes entières, merci ! Prévenez-nous simplement à l'avance.</p></details>
+      <details><summary>Avez-vous plus de photos du domaine ?</summary><p>Oui. Contactez-nous via le formulaire ou sur WhatsApp au 06 11 71 80 49 : nous vous enverrons notre brochure de présentation, plus complète en informations et en photos.</p></details>
+      <details><summary>Peut-on vous appeler ?</summary><p>Oui, bien sûr, aux heures habituelles. Le plus simple est de nous envoyer d'abord un petit message WhatsApp avec les informations principales de votre demande (dates, nombre de personnes, type d'événement). Nous fixons ensuite ensemble un rendez-vous téléphonique. Ces échanges sont indispensables : toute réservation passe par une ou plusieurs bonnes conversations au téléphone.</p></details>
+      <details><summary>Peut-on louer le domaine pour une seule nuit ?</summary><p>En principe, non : la location se fait pour deux nuits minimum, et nos tarifs sont calculés sur cette base. Une réservation faite à l'avance pour une seule nuit est donc facturée au prix de deux nuits. Exception : si le domaine est encore libre une dizaine de jours avant la date, nous pouvons parfois proposer une location d'une nuit, à un tarif légèrement inférieur. Cela se décide au dernier moment.</p></details>
+      <details><summary>Peut-on rester une nuit supplémentaire ?</summary><p>Oui, il est possible d'ajouter une nuit supplémentaire, moyennant un supplément. Indiquez-le simplement dans votre demande de devis.</p></details>
+      <details><summary>Peut-on organiser un événement en semaine ?</summary><p>Oui, et les tarifs sont d'ailleurs plus avantageux en semaine que le week-end.</p></details>
+      <details><summary>Peut-on organiser un séjour plus long, d'une semaine par exemple ?</summary><p>Oui, mais pour un groupe plus réduit. Avec ses 60 couchages, la maison est parfaite pour une ou deux soirées de fête. Pour un séjour d'une semaine, nous recommandons environ 35 personnes, 40 au maximum : au-delà, on se sent vite un peu à l'étroit sur la durée.</p></details>
+      <details><summary>Le domaine est-il ouvert toute l'année ?</summary><p>Oui, toute l'année.</p></details>
+      <details><summary>Y a-t-il un nombre minimum de personnes ?</summary><p>Non, aucun minimum.</p></details>
+      <details><summary>Quels moyens de paiement acceptez-vous ?</summary><p>Le virement ou les espèces, dans la limite du plafond légal de paiement en espèces.</p></details>
+      <details><summary>Que se passe-t-il en cas d'annulation ?</summary><p>La réservation est validée par un acompte de 500 €. En cas d'annulation, cet acompte n'est en principe pas remboursable. Selon la situation, par exemple si nous parvenons à relouer le domaine à vos dates, nous pouvons toujours en discuter ensemble.</p></details>
+      <h3 class="faq-g">Le domaine</h3>
+      <details><summary>Est-ce qu'on loue le domaine en entier ?</summary><p>Oui. Le domaine est loué à un seul groupe à la fois, en gestion libre : tous les espaces sont pour vous.</p></details>
+      <details><summary>Combien de personnes peut-on accueillir ?</summary><p>En journée, jusqu'à 100 personnes, et même un peu plus. Pour dormir, la maison accueille 60 personnes maximum. Quelques tentes peuvent s'ajouter, à voir ensemble au cas par cas.</p></details>
+      <details><summary>Le domaine est-il accessible aux personnes à mobilité réduite ?</summary><p>Oui. Le domaine est un établissement recevant du public (ERP) de 5e catégorie avec locaux à sommeil, aux normes et soumis au contrôle de la commission de sécurité. Il est entièrement accessible en fauteuil : la chambre PMR, avec sa salle de bain et ses toilettes accessibles, se trouve à proximité de la grande terrasse où se déroule la fête, une rampe aux normes permet d'accéder au deuxième étage, et les cheminements autour de la maison sont eux aussi adaptés.</p></details>
+      <details><summary>Y a-t-il des voisins ? La maison a-t-elle un vis-à-vis ?</summary><p>La maison n'a aucun vis-à-vis : on ne voit aucun voisin, les premiers se trouvent à environ 500 mètres. Mais ils existent bien, et le son porte loin dans la campagne, surtout les basses. C'est pour cela que nous vous demandons de rester raisonnables avec la musique, en particulier avec les caissons de basse.</p></details>
+      <details><summary>Comment la maison est-elle chauffée ?</summary><p>La maison est équipée d'un chauffage central avec une chaudière à granulés. Seuls deux espaces de couchage, le dortoir annexe Bouteilles et le dortoir voûté à compartiments, disposent d'un chauffage d'appoint électrique. La grande salle 4 saisons est chauffée par un grand poêle à bois, de mi-novembre à mi-mars environ : le bois pour ce poêle est fourni.</p></details>
+      <details><summary>Peut-on planter des tentes ?</summary><p>Oui, dans la mesure du raisonnable. Nous devons simplement connaître le nombre exact de personnes présentes sur la propriété.</p></details>
+      <details><summary>Peut-on venir en camping-car ou en camion aménagé ?</summary><p>Oui, ils sont les bienvenus et peuvent se garer sur le domaine. En revanche, il est formellement interdit de les brancher à l'électricité du domaine.</p></details>
+      <details><summary>Les animaux de compagnie sont-ils acceptés ?</summary><p>Oui, vos animaux sont les bienvenus sur le domaine, dans la mesure du raisonnable. Merci simplement de ramasser leurs déjections. En revanche, ils ne sont pas admis à l'intérieur de la maison, ni dans les chambres et sur la literie.</p></details>
+      <details><summary>Y a-t-il des hébergements à proximité pour ceux qui préfèrent plus d'intimité ?</summary><p>Oui. Pour ceux qui souhaitent plus d'intimité, ou pour les personnes âgées qui préfèrent ne pas dormir en dortoir, la commune de Thèze propose des gîtes communaux : contactez directement la mairie de Thèze (04 92 62 12 94, mairie.theze@wanadoo.fr, ouverte le lundi et le jeudi de 13 h à 16 h). Vous trouverez aussi plusieurs locations sur la commune sur Airbnb.</p></details>
+      <details><summary>Le domaine se prête-t-il aux anniversaires surprises ?</summary><p>Oui, parfaitement ! Le parking situé derrière la maison accueille 20 à 25 voitures sans qu'on les voie en arrivant. C'est pour ce petit détail que de nombreux anniversaires surprises sont organisés chez nous.</p></details>
+      <details><summary>Y a-t-il le Wi-Fi ?</summary><p>Non, il n'y a pas de Wi-Fi sur le domaine. En revanche, la 5G fonctionne parfaitement, par exemple pour lancer votre musique en streaming.</p></details>
+      <details><summary>Y a-t-il des sèche-cheveux ?</summary><p>Non, il n'y a aucun sèche-cheveux sur place : pensez à apporter le vôtre.</p></details>
+      <details><summary>Y a-t-il des clés ? Qui est présent pendant le séjour ?</summary><p>Il n'y a pas de clés : tout est ouvert. Le domaine est un établissement recevant du public de 5e catégorie avec locaux à sommeil. La loi impose donc la présence permanente d'un gardien sur la propriété, notamment pour surveiller le système de sécurité incendie. Il dispose de son propre logement, et vous ne le verrez qu'aux états des lieux d'entrée et de sortie, sauf alerte incendie. Si tout le groupe s'absente, c'est lui qui veille sur le domaine. Les chambres et dortoirs ne ferment pas à clé : nous accueillons des familles et des groupes d'amis qui se font confiance. Un événement où les invités auraient besoin de s'enfermer ne correspond pas à l'esprit du domaine.</p></details>
+      <details><summary>Où peut-on se garer ?</summary><p>Le domaine dispose de deux parkings : l'un derrière la maison, pour environ 25 voitures, et un champ à l'entrée du domaine, pour une cinquantaine de voitures supplémentaires.</p></details>
+      <details><summary>Peut-on fumer à l'intérieur ?</summary><p>Non, il est interdit de fumer à l'intérieur des bâtiments. Des cendriers sont à votre disposition à l'extérieur.</p></details>
+      <details><summary>Le domaine est-il adapté aux enfants ?</summary><p>Un lit bébé et une chaise haute sont à votre disposition. Le mini-bassin est entièrement clôturé et fermé par un enclos.</p></details>
+      <details><summary>Y a-t-il une piscine ?</summary><p>Non, pas de piscine, mais un mini-bassin de moins de 10 m² pour se rafraîchir, entièrement clôturé et fermé à clé.</p></details>
+      <details><summary>Fait-il chaud en été ? Y a-t-il la climatisation ?</summary><p>Il n'y a pas de climatisation, mais les gros murs en pierre de la maison gardent bien la fraîcheur.</p></details>
+      <details><summary>Y a-t-il un lave-linge ?</summary><p>Non.</p></details>
+      <details><summary>Peut-on louer des draps sur place ?</summary><p>Non. Si vous ne souhaitez pas apporter vos draps, organisez-vous directement avec un loueur de linge : nous ne nous en occupons pas.</p></details>
+      <h3 class="faq-g">Cuisine et matériel</h3>
+      <details><summary>Comment la cuisine est-elle équipée ?</summary><p>La cuisine est bien équipée pour les groupes : grandes marmites, grandes poêles, bols, plats et plateaux en inox, ustensiles de base (couteaux, économes…). En revanche, ce n'est pas une cuisine de maison : il n'y a pas de petit électroménager (mixeur, robot, râpe électrique…). Si vous en avez besoin, pensez à apporter le vôtre.</p></details>
+      <details><summary>Que faut-il apporter ?</summary><p>Pensez à tout apporter pour votre séjour : draps et serviettes, torchons, papier toilette, produit vaisselle, éponges et produits d'entretien, ainsi que le bois et le charbon si vous prévoyez des grillades, le four à pizza ou un méchoui. Vous trouverez toujours une petite base sur place à votre arrivée, mais elle ne suffit pas pour tout un séjour. Si vous aimez cuisiner avec de bons couteaux bien aiguisés, apportez les vôtres : nous en avons beaucoup, mais il est difficile de les garder parfaitement affûtés d'un groupe à l'autre.</p></details>
+      <details><summary>Faut-il apporter du produit pour le lave-vaisselle ?</summary><p>Non, le produit pour le lave-vaisselle est fourni.</p></details>
+      <details><summary>Quelles cafetières y a-t-il sur place ?</summary><p>Plusieurs cafetières Senseo et plusieurs cafetières à filtre. Pensez à apporter vos dosettes Senseo et votre café moulu.</p></details>
+      <details><summary>Y a-t-il un micro-ondes ?</summary><p>Oui, un petit micro-ondes se trouve dans la cuisine intérieure du corps principal (pas dans la cuisine semi-professionnelle).</p></details>
+      <details><summary>Peut-on utiliser le grand plat à paella ?</summary><p>Oui : le grand plat à paella et son brûleur à gaz sont à votre disposition, avec une grande table en inox pour l'installer à l'extérieur. En revanche, la bouteille de gaz pour la paella n'est pas fournie : apportez la vôtre. Le gaz fourni par le domaine est réservé au piano de la cuisine.</p></details>
+      <h3 class="faq-g">Musique et soirée</h3>
+      <details><summary>Peut-on faire de la musique toute la nuit, et à quel volume ?</summary><p>Oui, la musique est possible toute la nuit, sur la grande terrasse couverte. Mais notre priorité, c'est le confort de nos voisins : le volume, et surtout les basses, doivent rester raisonnables. Ce que les voisins entendent dépend de beaucoup de choses, comme le vent ou une nuit de canicule où chacun dort fenêtres ouvertes, et c'est ce qui fixe la limite. Nous avons déjà accueilli des soirées musicales, mais les gros systèmes son, les caissons de basse poussés au maximum et les DJ qui s'enchaînent sans tenir compte de ces règles ne sont pas possibles ici. Les Terrasses du Châtelard ne sont pas l'endroit pour faire le plus de bruit possible : on fait la fête, mais dans le respect de tous.</p></details>
+      <details><summary>Y a-t-il un système son sur place ?</summary><p>Oui, une enceinte amplifiée de 1000 watts est à votre disposition. Pour une table de mixage ou un autre système son, vous apportez votre propre matériel, à condition d'en parler avec nous à l'avance : nous n'acceptons plus les installations trop importantes. On peut déjà faire une très belle ambiance, presque comme en boîte de nuit, mais le domaine n'a pas de salle insonorisée pour les gros événements musicaux. Musique toute la journée et toute la nuit, oui. Caissons de basse démesurés, non : notre priorité reste le confort de nos voisins.</p></details>
+      <details><summary>Y a-t-il des jeux de lumière pour la soirée ?</summary><p>Oui, une base d'éclairage festif est en place : des lumières de couleur qui s'animent au rythme de la musique. Libre à vous d'en apporter davantage, puisque le domaine se loue en gestion libre.</p></details>
+      <details><summary>Peut-on faire un feu d'artifice ?</summary><p>Cela dépend de la réglementation locale en vigueur au moment de votre séjour, notamment des arrêtés liés au risque d'incendie en période sèche. Parlez-en avec nous à l'avance : nous vous dirons si c'est possible à vos dates.</p></details>
+      <details><summary>Acceptez-vous les soirées étudiantes ?</summary><p>Non. Nous n'acceptons plus aucune soirée étudiante. Nous en avons accueilli par le passé, et chacune s'est soldée par d'importants dégâts, chiffrés à plusieurs milliers d'euros. Nous avons donc définitivement arrêté ce type d'événement.</p></details>
+      <h3 class="faq-g">Organisation de l'événement</h3>
+      <details><summary>Peut-on installer un chapiteau ?</summary><p>Oui, un chapiteau ou une tente de réception peut être installé dans le champ.</p></details>
+      <details><summary>Un food truck ou un traiteur peut-il se brancher à l'électricité ?</summary><p>Ils sont les bienvenus, mais ne peuvent pas se brancher sur l'installation électrique du domaine : ils doivent être autonomes.</p></details>
+      <details><summary>Les camions de livraison et de traiteur peuvent-ils accéder facilement ?</summary><p>Oui, l'accès est facile.</p></details>
+      <details><summary>Quelles décorations sont autorisées ?</summary><p>Vous pouvez fixer des décorations aux murs. Les bougies sont acceptées, à condition d'être bien surveillées. En revanche, les confettis sont interdits, car impossibles à ramasser : on en retrouve pendant des mois. Les lanternes volantes sont formellement interdites, à cause du risque d'incendie.</p></details>
+      <h3 class="faq-g">Repas et prestataires</h3>
+      <details><summary>Peut-on faire venir notre traiteur ?</summary><p>Oui. Vous pouvez cuisiner vous-mêmes dans la cuisine semi-professionnelle équipée ou faire venir le traiteur et les prestataires de votre choix. Nous n'imposons aucun traiteur et ne prenons aucune commission sur vos prestataires. Le méchoui peut aussi être organisé sur devis.</p></details>
+      <details><summary>Y a-t-il un droit de bouchon ?</summary><p>Non. Il n'y a aucun droit de bouchon : vous apportez les boissons que vous voulez.</p></details>
+      <details><summary>Peut-on faire le méchoui nous-mêmes ?</summary><p>Oui, à condition d'apporter tout votre matériel de cuisson. Vous pouvez utiliser l'espace dédié au méchoui, mais nous ne prêtons plus nos broches ni nos moteurs. Pour les grillades, le barbecue argentin de 1,90 m de large est à votre disposition, avec ses grilles. Le bois et le charbon restent à apporter.</p></details>
+      <details><summary>Quand faut-il confirmer le méchoui ?</summary><p>Idéalement au moins trois semaines à l'avance, et au plus tard quinze jours avant votre événement. Plus tôt, c'est encore mieux. Le prix que nous vous donnons est indicatif : il est calculé sur le cours actuel de la viande et peut donc varier légèrement d'ici la date de votre événement.</p></details>
+      <details><summary>À qui paie-t-on le méchoui ?</summary><p>Le méchoui est réglé directement au prestataire extérieur qui le réalise, sur place, par virement bancaire.</p></details>
+      <details><summary>Peut-on utiliser le four à pizza et le barbecue ?</summary><p>Oui, ils sont en libre service pendant tout votre séjour. Il n'y a pas de barbecue électrique : le barbecue fonctionne au bois ou au charbon de bois, le charbon de bois étant le plus simple. Le bois et le charbon sont à votre charge. ⚠ Important : ne touchez jamais aux cendres, ni dans le four à pizza, ni dans le barbecue. Laissez-les en place : c'est nous qui nous en occupons, trois jours après votre départ, une fois qu'il ne reste plus aucune braise. C'est une question de sécurité.</p></details>
+      <details><summary>Peut-on faire un feu ou installer un brasero ailleurs sur le domaine ?</summary><p>Non, c'est formellement interdit. Le feu n'est autorisé que dans les équipements prévus à cet effet : le four à pizza, le barbecue et l'espace méchoui. Aucun feu de camp ni brasero improvisé, même pour la décoration.</p></details>
+      <details><summary>Proposez-vous d'autres prestations, comme les petits-déjeuners ou les repas ?</summary><p>Non. La seule prestation que nous proposons est le méchoui. Il est réalisé par un prestataire extérieur avec qui nous travaillons depuis longtemps, et qui réserve ses week-ends en priorité pour le domaine. Pour le reste, vous vous organisez librement. Nos partenaires, présentés plus bas sur cette page, peuvent vous aider pour les boissons, la viande, le pain ou un service traiteur.</p></details>
+      <details><summary>Pouvez-vous nous recommander d'autres prestataires (DJ, fleuriste, décoration, traiteur…) ?</summary><p>Le domaine se loue en gestion libre : c'est vous qui choisissez et organisez vos prestataires. Les seuls que nous recommandons sont nos partenaires de confiance, présentés sur cette page. Pour le reste (musique, fleurs, décoration, autres traiteurs…), nous ne faisons pas d'intermédiaire et ne donnons pas d'autres recommandations.</p></details>
+      <details><summary>Connaissez-vous des serveurs pour le service ?</summary><p>Nous ne recommandons personne personnellement. La solution la plus simple et la plus économique est de contacter directement le lycée hôtelier de Sisteron (lycée Paul Arène, 04 92 61 02 99). Ses élèves en hôtellerie-restauration sont souvent ravis de faire un extra le week-end pour assurer le service. C'est à vous de les contacter : nous ne nous occupons pas de l'organisation.</p></details>
+      <details><summary>Connaissez-vous un pâtissier pour le gâteau ?</summary><p>Nous ne travaillons pas avec un pâtissier en particulier. Pour nos propres gâteaux, nous passons commande au Super U ou à la boulangerie Ange, tous deux dans la zone commerciale Val Durance, à 10 minutes du domaine.</p></details>
+      <details><summary>Connaissez-vous des babysitters ?</summary><p>Non. Nous ne recommandons aucun service de garde d'enfants. Des sites internet spécialisés vous permettent de trouver facilement une babysitter dans le secteur.</p></details>
+      <h3 class="faq-g">Fin de séjour</h3>
+      <details><summary>Faut-il laver la terrasse couverte après la fête ?</summary><p>Non. Ramassez simplement les papiers et les déchets. Nous passons nous-mêmes un coup de Kärcher sur la terrasse après votre départ : vous pouvez faire la fête l'esprit tranquille, même si un verre se renverse.</p></details>
+      <details><summary>Comment savoir où remettre chaque chose avant de partir ?</summary><p>Avec tout ce qui est mis à votre disposition, on oublie facilement où chaque chose était rangée après un week-end de fête. C'est pourquoi nous vous remettons à votre arrivée un guide de rangement pas à pas, illustré de photos : il montre exactement où et comment tout se range, dans la cuisine, dans le vaisselier, et pour les tables et les chaises.</p></details>
+      <details><summary>Peut-on prendre un ménage supplémentaire ?</summary><p>Pas de forfait : c'est à voir au cas par cas avec nous.</p></details>
+      <details><summary>Comment s'organise la gestion des poubelles ?</summary><p>Nous ne prenons pas en charge l'évacuation des déchets : c'est à vous de les emporter dans les conteneurs de la commune. Nous vous donnons les coordonnées GPS des points de collecte les plus proches. Merci de bien trier et de tout déposer dans les conteneurs : aucun sac ne doit être laissé à côté. Prévoyez du temps et du monde en fin de séjour pour le faire correctement. C'est important pour nous et pour nos bonnes relations avec la mairie.</p></details>
+      <details><summary>Que se passe-t-il si l'on casse quelque chose ?</summary><p>Pas de panique : quand on fait la fête, un verre ou une chaise peut casser, et ce n'est pas la fin du monde. Faites attention, bien sûr, mais si cela arrive, prévenez-nous simplement. Tant que les choses sont dites franchement, on trouve toujours un arrangement, et notre but est justement de ne pas toucher à votre caution. En cas de casse importante, nous sommes évidemment obligés de la facturer. En revanche, toute casse dissimulée et découverte après votre départ sera facturée intégralement. C'est pour cela que l'honnêteté et le sens des responsabilités font partie des valeurs auxquelles nous tenons.</p></details>
+      <details><summary>Comment se passe la caution si l'on n'a plus de chéquier ?</summary><p>Aucun souci. La caution de 3000 € peut être versée par virement. Elle vous est reversée dans son intégralité après l'état des lieux de fin de séjour.</p></details>
+      <h3 class="faq-g">Autour du domaine</h3>
+      <details><summary>Y a-t-il des commerces à proximité ?</summary><p>Oui. La zone commerciale Val Durance se trouve à 10 minutes du domaine, à la sortie Sisteron Nord de l'A51. Vous y trouverez notamment un Super U, un Lidl, un magasin bio, une cave à vins et spiritueux, Gifi, Action, Brico Dépôt et Decathlon.</p></details>
+      <details><summary>Y a-t-il des promenades autour du domaine ?</summary><p>Oui, plusieurs, et toutes partent de la maison, sans prendre la voiture : les gorges de la Durance, à environ 1 km à vol d'oiseau, soit une trentaine de minutes de marche ; le château de Sigoyer (04) ; ou une petite balade sur la crête juste au-dessus de la maison, d'où l'on voit très bien la séparation entre les Alpes et la Provence. En chemin, vous traverserez des vergers de pommiers et des champs de lavande.</p></details>
+      <details><summary>Quelles activités faire dans les environs ?</summary><p>À une trentaine de minutes : la via ferrata de la Grande Fistoire et les gorges de la Méouge, avec leur eau turquoise au cœur des gorges. À voir aussi : la citadelle de Sisteron. Pour les sportifs, on peut faire du rafting sur la Durance, avec des départs depuis Tallard. La région est aussi très réputée pour le vélo, grâce à ses routes très tranquilles. En été, quand l'eau est bonne, la baignade dans le Sasse, dans la vallée de La Motte-du-Caire, est un vrai bonheur.</p></details>
+      <details><summary>Comment venir sans voiture ?</summary><p>Le plus simple est de venir en train jusqu'à la gare de Sisteron, puis de prendre un taxi.</p></details>
+      <details><summary>Où sont le médecin, la pharmacie et les urgences les plus proches ?</summary><p>À Sisteron : pharmacies, médecins et service d'urgences, le plus proche du domaine.</p></details>
+    </div>
+  </div>
+</section>
+<section id="contact">
+  <div class="wrap contact">
+    <div class="side">
+      <div class="eyebrow">Contact</div>
+      <h2>Parlons de votre fête</h2>
+      <p>Dites-nous vos dates, votre nombre d'invités et ce que vous imaginez, par WhatsApp de préférence, ou via le formulaire ci-dessous. Nous vous répondons avec un devis et les disponibilités.</p>
+      <div class="coord">
+        <span>Propriétaire</span><div>Thibault Garcin</div>
+        <span>Adresse</span><div>Les Terrasses du Châtelard, 04200 Thèze</div>
+        <span>Téléphone et WhatsApp</span><div class="phone"><a href="tel:+33611718049">+33 6 11 71 80 49</a></div>
+        <span>E-mail</span><div><a href="mailto:contact@terrassesduchatelard.com">contact@terrassesduchatelard.com</a></div>
+      </div>
+      <p>Pour un échange plus rapide, nous privilégions WhatsApp.</p>
+      <a class="wa" href="https://wa.me/33611718049" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>Nous écrire sur WhatsApp</a>
+    </div>
+    <form id="devis">
+      <div class="field"><label for="nom">Nom et prénom</label><input id="nom" name="nom" required autocomplete="name"></div>
+      <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+      <div class="field"><label for="tel">Téléphone</label><input id="tel" name="telephone" type="tel" required autocomplete="tel"></div>
+      <div class="field"><label for="date">Date souhaitée</label><input id="date" name="date" type="date"></div>
+      <div class="field full"><span class="lbl">Type d'événement</span>
+        <div class="chips">
+          <input type="radio" name="type" id="t1" value="Mariage" checked><label for="t1">Mariage</label>
+          <input type="radio" name="type" id="t2" value="Réunion de famille"><label for="t2">Réunion de famille</label>
+          <input type="radio" name="type" id="t3" value="Anniversaire"><label for="t3">Anniversaire</label>
+          <input type="radio" name="type" id="t4" value="Entre amis"><label for="t4">Entre amis</label>
+          <input type="radio" name="type" id="t5" value="Stage ou séminaire"><label for="t5">Stage ou séminaire</label>
+        </div>
+      </div>
+      <div class="field"><label for="nb">Nombre d'invités</label><input id="nb" name="invites" type="number" min="1" max="100" inputmode="numeric"></div>
+      <div class="field"><label for="nuits">Nuits sur place</label>
+        <select id="nuits" name="nuits"><option>Pas de nuitée</option><option>1 nuit</option><option selected>2 nuits</option><option>3 nuits ou plus</option></select></div>
+      <div class="field full"><label for="meca">Méchoui ou grillades</label>
+        <select id="meca" name="mechoui"><option>Pas encore décidé</option><option>Méchoui d'agneau</option><option>Cochon à la broche</option><option>Nous nous occupons de la cuisine</option></select></div>
+      <div class="field full"><label for="msg">Votre projet</label><textarea id="msg" name="message" placeholder="Le programme, vos questions, vos envies…"></textarea></div>
+      <button class="btn" type="submit" id="sendWa">Envoyer ma demande par WhatsApp</button>
+      <div class="alt">Pas de WhatsApp ? Écrivez-nous à <a id="mailLink" href="mailto:contact@terrassesduchatelard.com">contact@terrassesduchatelard.com</a></div>
+      <div class="sent" id="sent" hidden></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>Les Terrasses du Châtelard</b><p>Domaine privé pour vos événements · 04200 Thèze, Alpes-de-Haute-Provence</p></div>
+    <p>© 2026 Les Terrasses du Châtelard</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var b=document.getElementById('menuBtn'), n=document.getElementById('nav');
+  b.addEventListener('click',function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+  n.addEventListener('click',function(e){if(e.target.tagName==='A'){n.classList.remove('open');b.setAttribute('aria-expanded','false')}});
+  // WhatsApp en priorité : le message est prérempli avec les réponses du formulaire.
+  var f=document.getElementById('devis'), sent=document.getElementById('sent');
+  function msg(){
+    var v=function(id){var el=document.getElementById(id);return el&&el.value?el.value.trim():''};
+    var t=f.querySelector('input[name="type"]:checked');
+    var d=v('date'); if(d){var p=d.split('-'); d=p[2]+'/'+p[1]+'/'+p[0]}
+    var l=['Bonjour, je souhaite un devis pour Les Terrasses du Châtelard.','',
+      'Nom : '+v('nom'),'E-mail : '+v('email'),'Téléphone : '+v('tel'),
+      'Date souhaitée : '+(d||'à définir'),'Événement : '+(t?t.value:''),
+      "Nombre d'invités : "+(v('nb')||'à définir'),'Nuits sur place : '+v('nuits'),
+      'Méchoui : '+v('meca')];
+    if(v('msg')) l.push('','Projet : '+v('msg'));
+    return l.join('\n');
+  }
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var a=document.createElement('a'); a.href='https://wa.me/33611718049?text='+encodeURIComponent(msg());
+    a.target='_blank'; a.rel='noopener'; document.body.appendChild(a); a.click(); a.remove();
+    sent.textContent="WhatsApp s'ouvre avec votre demande déjà rédigée : il ne vous reste qu'à appuyer sur Envoyer.";
+    sent.hidden=false;
+  });
+  // E-mail : ouvre la messagerie du visiteur, avec sa demande déjà rédigée si le formulaire est rempli.
+  document.getElementById('mailLink').addEventListener('click',function(){
+    var filled=document.getElementById('nom').value.trim();
+    this.href='mailto:contact@terrassesduchatelard.com?subject='+encodeURIComponent('Demande de devis – Les Terrasses du Châtelard')+(filled?'&body='+encodeURIComponent(msg()):'');
+  });
+})();
+</script>
+<script>
+(function(){
+var tabs=document.querySelectorAll('.gtab'),items=[].slice.call(document.querySelectorAll('.gitem'));
+tabs.forEach(function(t){t.addEventListener('click',function(){tabs.forEach(function(x){x.classList.remove('on')});t.classList.add('on');var f=t.dataset.f;items.forEach(function(i){i.classList.toggle('hide',f!=='tout'&&i.dataset.c!==f)})})});
+var lb=document.getElementById('lb'),img=lb.querySelector('img'),cap=lb.querySelector('figcaption'),cur=0,list=[];
+function show(){var b=list[cur],m=b.querySelector('img');img.src=m.src;img.alt=m.alt;cap.textContent=m.alt+'  ·  '+(cur+1)+' / '+list.length}
+function open(b){list=items.filter(function(i){return !i.classList.contains('hide')});cur=list.indexOf(b);lb.hidden=false;document.body.style.overflow='hidden';show()}
+function close(){lb.hidden=true;document.body.style.overflow=''}
+function go(d){cur=(cur+d+list.length)%list.length;show()}
+items.forEach(function(b){b.addEventListener('click',function(){open(b)})});
+lb.querySelector('.lb-x').onclick=close;lb.querySelector('.lb-p').onclick=function(e){e.stopPropagation();go(-1)};lb.querySelector('.lb-n').onclick=function(e){e.stopPropagation();go(1)};
+lb.addEventListener('click',function(e){if(e.target===lb)close()});
+document.addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1)});
+var x0=null;lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});lb.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(dx<0?1:-1);x0=null});
+})();
+</script>
+
+</body>
+</html>
