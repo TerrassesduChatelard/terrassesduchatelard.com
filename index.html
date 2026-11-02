@@ -71,7 +71,7 @@ nav.links a:hover{color:var(--ink)}
 .btn:hover{transform:translateY(-1px)}
 nav.links .btn{color:var(--paper)}
 .menu-btn{display:none;background:none;border:0;padding:8px;color:var(--ink);cursor:pointer}
-@media (max-width:1440px){
+@media (max-width:1600px){
   nav.links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px max(20px, env(safe-area-inset-right,0px)) 20px max(20px, env(safe-area-inset-left,0px))}
   nav.links.open{display:flex}
   nav.links a{padding:14px 0;border-bottom:1px solid var(--line);font-size:1.05rem}
@@ -284,6 +284,20 @@ tr.total td{background:var(--pine);color:var(--paper);font-family:var(--f-displa
 
 /* Contact */
 #contact{background:var(--paper)}
+.devis-zone{display:flex;flex-direction:column;gap:14px;min-width:0;scroll-margin-top:84px}
+.devis-h{display:flex;align-items:center;gap:10px;margin:0}
+.devis-h svg{flex:none}
+.devis-sub{color:var(--ink-soft);margin:-6px 0 0}
+.devis-zone .broch{margin-top:0}
+.broch b strong{font-weight:800;letter-spacing:.03em}
+.fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:60;display:flex;align-items:center;gap:8px;padding:8px 18px 8px 10px;border-radius:999px;background:var(--pine);color:var(--paper);text-decoration:none;font-weight:600;font-size:.95rem;box-shadow:0 6px 20px rgba(20,30,25,.28);transition:opacity .25s,transform .25s}
+.fab.hide{opacity:0;transform:translateY(16px);pointer-events:none}
+.fab-paysan{width:44px;height:37px;flex:none;background:var(--paper);border-radius:50%;padding:3px 2px 0}
+.fab-mains{animation:tape .9s steps(2) infinite}
+@keyframes tape{50%{transform:translateY(-1.2px)}}
+@media (prefers-reduced-motion:reduce){.fab-mains{animation:none}.fab{transition:none}}
+@media print{.fab{display:none}}
+
 .contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,72px)}
 .contact .side{display:flex;flex-direction:column;gap:18px;min-width:0}
 .contact .side p{color:var(--ink-soft)}
@@ -374,8 +388,8 @@ footer p{font-size:.9rem;color:var(--band-soft)}
       <a href="#mechoui">Le méchoui</a>
       <a href="#galerie">Galerie photo</a>
       <a href="brochure-terrasses-du-chatelard.pdf" download="Brochure Les Terrasses du Châtelard.pdf" target="_blank" rel="noopener">Brochure détaillée</a>
-      <a href="#reserver">Réserver</a>
-      <a class="btn" href="#contact">Demander un devis</a>
+      <a href="#demande">Réserver</a>
+      <a class="btn" href="#demande">Demander un devis</a>
     </nav>
   </div>
 </header>
@@ -408,7 +422,7 @@ footer p{font-size:.9rem;color:var(--band-soft)}
       <p>Mariages, anniversaires, réunions de famille, séjours entre amis, séminaires : notre domaine est entièrement pensé et aménagé pour accueillir vos événements et vos moments de partage. Au milieu des champs, sans voisinage, cet ancien corps de ferme rénové cultive une ambiance rustique et champêtre, empreinte de la France d'antan. Un lieu authentique, simple et fonctionnel, destiné à ceux qui partagent notre goût pour la convivialité, les traditions et les plaisirs de la bonne franquette.</p>
     </div>
     <div class="cta">
-      <a class="btn" href="#contact">Demander un devis</a>
+      <a class="btn" href="#demande">Demander un devis</a>
       <a class="btn line" href="#esprit">Découvrir le domaine</a>
     </div>
   </div>
@@ -594,7 +608,7 @@ footer p{font-size:.9rem;color:var(--band-soft)}
           </div>
         </div>
         <p class="note">Prestation méchoui sur devis.</p>
-        <a class="btn" href="#contact" style="align-self:flex-start;background:var(--sun);color:#1F2A24">Demander un devis méchoui</a>
+        <a class="btn" href="#demande" style="align-self:flex-start;background:var(--sun);color:#1F2A24">Demander un devis méchoui</a>
       </div>
     </div>
   </div>
@@ -928,7 +942,7 @@ footer p{font-size:.9rem;color:var(--band-soft)}
     <div class="side">
       <div class="eyebrow">Contact</div>
       <h2>Parlons de votre fête</h2>
-      <p>Dites-nous vos dates, votre nombre d'invités et ce que vous imaginez, par WhatsApp de préférence, ou via le formulaire ci-dessous. Nous vous répondons avec un devis et les disponibilités.</p>
+      <p>Dites-nous vos dates, votre nombre d'invités et ce que vous imaginez, par WhatsApp de préférence, ou via le formulaire de demande de devis. Nous vous répondons avec un devis et les disponibilités.</p>
       <div class="coord">
         <span>Propriétaire</span><div>Thibault Garcin</div>
         <span>Adresse</span><div>Les Terrasses du Châtelard, 04200 Thèze</div>
@@ -937,11 +951,14 @@ footer p{font-size:.9rem;color:var(--band-soft)}
       </div>
       <p>Pour un échange plus rapide, nous privilégions WhatsApp.</p>
       <a class="wa" href="https://wa.me/33611718049" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>Nous écrire sur WhatsApp</a>
+    </div>
+    <div class="devis-zone" id="demande">
+      <h2 class="devis-h">Demander un devis <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path fill="#25D366" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/><path fill="#fff" d="M16.5 14.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg></h2>
+      <p class="devis-sub">Remplissez le formulaire : votre demande nous arrive directement sur WhatsApp.</p>
       <a class="broch" href="brochure-terrasses-du-chatelard.pdf" download="Brochure Les Terrasses du Châtelard.pdf" target="_blank" rel="noopener">
         <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M12 12v6m-3-3 3 3 3-3"/></svg>
-        <span><b>Télécharger la brochure détaillée</b><small>31 pages, plans de couchage et photos · PDF 9 Mo</small></span>
+        <span><b>Télécharger la <strong>BROCHURE DÉTAILLÉE</strong></b><small>31 pages, plans de couchage et photos · PDF 9 Mo</small></span>
       </a>
-    </div>
     <form id="devis">
       <div class="field"><label for="nom">Nom et prénom</label><input id="nom" name="nom" required autocomplete="name"></div>
       <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" required autocomplete="email"></div>
@@ -966,9 +983,28 @@ footer p{font-size:.9rem;color:var(--band-soft)}
       <div class="alt">Pas de WhatsApp ? Écrivez-nous à <a id="mailLink" href="mailto:contact@terrassesduchatelard.com">contact@terrassesduchatelard.com</a></div>
       <div class="sent" id="sent" hidden></div>
     </form>
+    </div>
   </div>
 </section>
 </main>
+<a class="fab" id="fab" href="#demande" aria-label="Demander un devis">
+  <svg class="fab-paysan" viewBox="0 0 48 40" aria-hidden="true">
+    <path d="M4 40c0-7 3.5-11.5 9-11.5S22 33 22 40z" fill="#5B7A8C"/>
+    <path d="M10.5 28.6l2.5 4 2.5-4" fill="none" stroke="#C9483B" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="13" cy="21.5" r="6.2" fill="#F1C9A5"/>
+    <circle cx="11" cy="20.6" r=".8" fill="#2B2620"/><circle cx="15.2" cy="20.6" r=".8" fill="#2B2620"/>
+    <path d="M9.2 24.1c1.6-1.4 2.9-.7 3.8 0 1-.7 2.3-1.4 3.8 0-1.4 1.2-2.6.9-3.8.3-1.2.6-2.4.9-3.8-.3z" fill="#5A3A22"/>
+    <path d="M.6 17.4c2.6-1.4 7-1.9 12.4-1.9s9.8.5 12.4 1.9c-1.5 1.1-6.3 1.7-12.4 1.7S2.1 18.5.6 17.4z" fill="#8C6A4A"/>
+    <path d="M7.3 16.4c.3-3.8 2.5-6.1 5.7-6.1s5.4 2.3 5.7 6.1c-3.3.6-8.1.6-11.4 0z" fill="#A9845E"/>
+    <path d="M7.4 15.2c3.7.5 7.6.5 11.3 0" stroke="#5A3A22" stroke-width="1.1" fill="none"/>
+    <g class="fab-mains"><path d="M18 33.5c3-.6 5.4-1.6 7.6-2.6" stroke="#5B7A8C" stroke-width="3" stroke-linecap="round"/><circle cx="26.4" cy="30.6" r="1.7" fill="#F1C9A5"/></g>
+    <path d="M27 24.5h17.5a1.2 1.2 0 0 1 1.2 1.3l-.9 7.7H28.2z" fill="#E9E3D3" stroke="#2B2620" stroke-width="1"/>
+    <path d="M29.6 26.8h12M29.8 28.9h9M30 31h10.5" stroke="#8C6A4A" stroke-width=".9"/>
+    <path d="M24.5 33.5h23" stroke="#2B2620" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+  <span>Demander un devis</span>
+</a>
+
 
 <footer>
   <div class="wrap">
@@ -1018,6 +1054,14 @@ footer p{font-size:.9rem;color:var(--band-soft)}
     var filled=document.getElementById('nom').value.trim();
     this.href='mailto:contact@terrassesduchatelard.com?subject='+encodeURIComponent('Demande de devis – Les Terrasses du Châtelard')+(filled?'&body='+encodeURIComponent(msg()):'');
   });
+})();
+</script>
+<script>
+(function(){
+  var fab=document.getElementById('fab'), zone=document.getElementById('demande'), seen=false;
+  function upd(){fab.classList.toggle('hide', seen || window.scrollY<window.innerHeight*0.6)}
+  if('IntersectionObserver' in window){new IntersectionObserver(function(e){seen=e[0].isIntersecting;upd()},{threshold:0.15}).observe(zone)}
+  window.addEventListener('scroll',upd,{passive:true}); upd();
 })();
 </script>
 <script>
