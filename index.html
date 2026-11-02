@@ -50,19 +50,28 @@ img{display:block;max-width:100%}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none;white-space:nowrap}
 .brand svg{flex:none}
 .brand b{font-family:var(--f-display);font-weight:400;font-size:1.08rem;line-height:1.05}
 nav.links{display:flex;gap:18px;align-items:center}
 nav.links a.nav-must{color:var(--sun-ink);font-weight:600}
-.nav-tag{display:inline-block;margin-left:4px;padding:2px 8px;border-radius:999px;background:var(--sun);color:#1F2A24;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;vertical-align:1px}
-nav.links a{text-decoration:none;font-size:.93rem;color:var(--ink-soft)}
+nav.links a.nav-must{display:inline-flex;align-items:center;gap:2px;white-space:nowrap}
+.nav-tip{display:inline-flex;align-items:center;margin:-10px 0 -10px 2px}
+.paysan{width:30px;height:28px;flex:none;overflow:visible}
+.paysan .p-arm{transform-origin:23px 31px;animation:pointe 3.6s ease-in-out infinite}
+.paysan .p-body{transform-origin:16px 40px;animation:hoche 3.6s ease-in-out infinite}
+@keyframes pointe{0%,70%,100%{transform:rotate(0)}78%{transform:rotate(-9deg)}86%{transform:rotate(3deg)}}
+@keyframes hoche{0%,70%,100%{transform:rotate(0)}78%{transform:rotate(4deg)}86%{transform:rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){.paysan .p-arm,.paysan .p-body{animation:none}}
+.nav-tag{position:relative;display:inline-block;margin-left:5px;padding:3px 9px 3px;border-radius:9px;background:var(--sun);color:#1F2A24;font-size:.6rem;line-height:1.15;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-align:center;white-space:nowrap;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.nav-tag:before{content:"";position:absolute;left:-5px;top:50%;margin-top:-4px;border:4px solid transparent;border-right:5px solid var(--sun);border-left:0}
+nav.links a{text-decoration:none;font-size:.93rem;color:var(--ink-soft);white-space:nowrap}
 nav.links a:hover{color:var(--ink)}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;background:var(--pine);color:var(--paper);text-decoration:none;font-weight:600;font-size:.95rem;border:0;cursor:pointer;font-family:var(--f-body);transition:transform .15s}
 .btn:hover{transform:translateY(-1px)}
 nav.links .btn{color:var(--paper)}
 .menu-btn{display:none;background:none;border:0;padding:8px;color:var(--ink);cursor:pointer}
-@media (max-width:1180px){
+@media (max-width:1440px){
   nav.links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px max(20px, env(safe-area-inset-right,0px)) 20px max(20px, env(safe-area-inset-left,0px))}
   nav.links.open{display:flex}
   nav.links a{padding:14px 0;border-bottom:1px solid var(--line);font-size:1.05rem}
@@ -345,13 +354,26 @@ footer p{font-size:.9rem;color:var(--band-soft)}
     </button>
     <nav class="links" id="nav">
       <a href="#esprit">L'esprit</a>
-      <a class="nav-must" href="#occasions">Notre philosophie <span class="nav-tag">À lire</span></a>
+      <a class="nav-must" href="#occasions">Notre philosophie <span class="nav-tip"><svg class="paysan" viewBox="0 0 44 40" aria-hidden="true">
+<g class="p-body">
+<path d="M6 40c0-8 4-13 10-13s10 5 10 13z" fill="#5B7A8C"/>
+<path d="M13 27l3 5 3-5" fill="none" stroke="#C9483B" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="16" cy="19" r="7" fill="#F1C9A5"/>
+<circle cx="13.6" cy="18" r=".9" fill="#2B2620"/><circle cx="18.6" cy="18" r=".9" fill="#2B2620"/>
+<path d="M11.5 22c1.8-1.6 3.3-.8 4.5 0 1.2-.8 2.7-1.6 4.5 0-1.6 1.4-3.1 1-4.5.4-1.4.6-2.9 1-4.5-.4z" fill="#5A3A22"/>
+<path d="M2.5 14.2c3-1.6 8-2.2 13.5-2.2s10.5.6 13.5 2.2c-1.7 1.3-7.2 1.9-13.5 1.9S4.2 15.5 2.5 14.2z" fill="#8C6A4A"/>
+<path d="M9.5 13c.3-4.4 2.9-7 6.5-7s6.2 2.6 6.5 7c-3.8.7-9.2.7-13 0z" fill="#A9845E"/>
+<path d="M9.6 11.6c4.2.6 8.6.6 12.8 0" stroke="#5A3A22" stroke-width="1.2" fill="none"/>
+</g>
+<g class="p-arm"><path d="M23 31.5c4-1.2 8.2-2.6 12.3-4.4" stroke="#5B7A8C" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+<circle cx="36.2" cy="26.7" r="2.1" fill="#F1C9A5"/><path d="M37.6 25.9l4.6-2.1" stroke="#F1C9A5" stroke-width="1.7" stroke-linecap="round"/></g>
+</svg><span class="nav-tag">À lire<br>avant de réserver</span></span></a>
       <a href="#espaces">Les espaces</a>
       <a href="#couchages">Couchages</a>
       <a href="#dehors">Extérieurs</a>
       <a href="#mechoui">Le méchoui</a>
       <a href="#galerie">Galerie photo</a>
-      <a href="brochure-terrasses-du-chatelard.pdf" download="Brochure Les Terrasses du Châtelard.pdf" target="_blank" rel="noopener">Brochure (PDF)</a>
+      <a href="brochure-terrasses-du-chatelard.pdf" download="Brochure Les Terrasses du Châtelard.pdf" target="_blank" rel="noopener">Brochure détaillée</a>
       <a href="#reserver">Réserver</a>
       <a class="btn" href="#contact">Demander un devis</a>
     </nav>
@@ -586,7 +608,7 @@ footer p{font-size:.9rem;color:var(--band-soft)}
         <h2>Le domaine est-il fait pour vous ?</h2>
         <div class="must-read" role="note">⚠ À lire impérativement avant de réserver</div>
       </div>
-      <p>Le domaine est fait pour les amoureux de la bonne franquette, ceux qui aiment la France d'antan, les vieilles bâtisses en pierre, les méchouis, les cochons grillés et les longues tablées qui se prolongent jusque tard dans la nuit.</p>
+      <p>Le domaine est fait pour les amoureux de la bonne franquette, ceux qui aiment la France d'antan, les vieilles bâtisses en pierre, les agneaux à la broche, les cochons grillés, les poulardes rôties et les longues tablées qui se prolongent jusque tard dans la nuit.</p>
     </div>
     <div class="occ-txt">
       <p>Nous aimons accueillir des personnes qui partagent nos valeurs : le respect, l'honnêteté, la confiance, la solidarité, l'amitié et le plaisir simple d'être ensemble. Des gens qui apprécient les lieux authentiques, la nature et cette convivialité qui ne s'achète pas. Ici, pas de luxe ostentatoire ni de décor artificiel : le charme du domaine réside dans sa simplicité, ses grands espaces, sa vue à 360° et sa capacité à réunir du monde dans un cadre exceptionnel.</p>
@@ -917,7 +939,7 @@ footer p{font-size:.9rem;color:var(--band-soft)}
       <a class="wa" href="https://wa.me/33611718049" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>Nous écrire sur WhatsApp</a>
       <a class="broch" href="brochure-terrasses-du-chatelard.pdf" download="Brochure Les Terrasses du Châtelard.pdf" target="_blank" rel="noopener">
         <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M12 12v6m-3-3 3 3 3-3"/></svg>
-        <span><b>Télécharger la brochure</b><small>31 pages, plans de couchage et photos · PDF 9 Mo</small></span>
+        <span><b>Télécharger la brochure détaillée</b><small>31 pages, plans de couchage et photos · PDF 9 Mo</small></span>
       </a>
     </div>
     <form id="devis">
